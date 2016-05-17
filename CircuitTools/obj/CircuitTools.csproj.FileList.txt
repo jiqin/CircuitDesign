@@ -1,4 +1,0 @@
-bin\Debug\CircuitTools.exe
-bin\Debug\CircuitTools.pdb
-obj\Debug\CircuitTools.exe
-obj\Debug\CircuitTools.pdb

@@ -1,5 +1,0 @@
-C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CircuitDesign\CircuitTools\bin\x86\Debug\CircuitTools.exe
-C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CircuitDesign\CircuitTools\bin\x86\Debug\CircuitTools.pdb
-C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CircuitDesign\CircuitTools\obj\x86\Debug\CircuitTools.exe
-C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CircuitDesign\CircuitTools\obj\x86\Debug\CircuitTools.pdb
-C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CircuitDesign\CircuitTools\obj\x86\Debug\CircuitTools.csprojResolveAssemblyReference.cache

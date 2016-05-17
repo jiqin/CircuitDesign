@@ -4,6 +4,7 @@ using CircuitModels;
 using CircuitTools;
 using System.Collections.Generic;
 using System.IO;
+using MatrixTools;
 
 namespace UnitTestProject1
 {
@@ -52,6 +53,23 @@ namespace UnitTestProject1
             Assert.AreEqual(1, values[7][0]);
             Assert.AreEqual(1, values[7][1]);
             Assert.AreEqual(1, values[7][2]);
+        }
+
+        [TestMethod]
+        public void IsEndNodeTest()
+        {
+            int[,] m = new int[4, 4] { { 1, 1, 0, 0 }, { 1, 1, 1, 1 }, { 0, 1, 1, 0 }, { 0, 1, 0, 1 } };
+            Assert.IsTrue(MatrixTool.IsEndNode(m, 0));
+            Assert.IsTrue(!MatrixTool.IsEndNode(m, 1));
+            Assert.IsTrue(MatrixTool.IsEndNode(m, 2));
+            Assert.IsTrue(MatrixTool.IsEndNode(m, 3));
+        }
+
+        [TestMethod]
+        public void SolveStarProblemTest()
+        {
+            // List<string> node_list = new List<string>(new string[] { "", "" });
+            // int[,] m = new int[4, 4] { { 1, 1, 0, 0 }, { 1, 1, 1, 1 }, { 0, 1, 1, 0 }, { 0, 1, 0, 1 } };
         }
     }
 }
