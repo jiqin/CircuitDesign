@@ -14,14 +14,14 @@ namespace CircuitDesign
 {
     public partial class FormMain : Form
     {
-        string component_model_file_path = Application.StartupPath + "\\component_model.mdb";
-        string circuit_template_file_path = Application.StartupPath + "\\component_template.xml";
+        string component_model_file_path = "Resources\\component_model.mdb";
+        string circuit_template_file_path = "Resources\\component_template.xml";
 
-        string init_dir_proj = Application.StartupPath + "\\Projlist";
+        string init_dir_proj = "results\\Projlist";
         string file_name_filter_proj = "项目文件(*.proj)|*.proj";
-        string init_dir_network = Application.StartupPath + "\\Netlist";
+        string init_dir_network = "results\\Netlist";
         string file_name_filter_network = "网表文件(*.net)|*.net";
-        string init_dir_circuit = Application.StartupPath + "\\Circuit";
+        string init_dir_circuit = "results\\Circuit";
         string file_name_filter_circuit = "电路图文件 (*.xml)|*.xml";
         string file_name_output_text = "文本输出文件 (*.txt)|*.txt";
 
@@ -87,6 +87,7 @@ namespace CircuitDesign
             richTextBox_network.Text = circuit_network_manager.get_network_content();
             init_data_grid_view_circuit_states();
             draw_pannel_cricuit(null);
+            treeView_reslt.Nodes.Clear();
         }
 
         private void draw_pannel_cricuit(AnalyzeResult result)
