@@ -1,0 +1,13 @@
+* source STARTEST
+X_U1         N00922 N01003 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+X_U3         N00949 N01033 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+X_U2         N00976 N01112 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+R_R1         N01003 N01033  1k  
+R_R2         N01033 N01112  1k  
+R_R3         0 N01033  1k  
+V_V1         N00922 0 0Vdc
+V_V2         N00949 0 0Vdc
+V_V3         N00976 0 0Vdc

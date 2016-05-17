@@ -1,0 +1,40 @@
+* source EXAMPLE02
+R_R1         N02487 N02449  1k  
+X_U5         N02216 N02531 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+R_R2         N03083 N03045  1k  
+X_W2    N02054 N03045 N01969 N02128 SCHEMATIC1_W2 
+X_U6         N02128 N02292 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+R_R3         N02319 N02531  1k  
+R_R4         N02319 N02292  1k  
+X_U8         N02487 GND2 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+R_R5         N02319 GND1  1k  
+X_U9         N03083 GND3 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+V_V1         N01847 GND1 0Vdc
+R_R7         N02216 N02174  1k  
+V_V2         N01908 GND2 0Vdc
+R_R8         N02054 N02216  1k  
+X_U1         N01847 N01969 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+X_U2         N01847 N02016 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+X_U3         N01908 N02054 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+X_W1    N02128 N02449 N02016 N02174 SCHEMATIC1_W1 
+X_U4         N01908 N02128 Sw_tClose PARAMS: tClose=0 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+
+.subckt SCHEMATIC1_W2 1 2 3 4  
+W_W2         3 4 VW_W2 _W2
+VW_W2         1 2 0V
+.MODEL         _W2 ISWITCH Roff=1e6 Ron=1.0 Ioff=0.0mA Ion=1mA
+.ends SCHEMATIC1_W2
+
+.subckt SCHEMATIC1_W1 1 2 3 4  
+W_W1         3 4 VW_W1 _W1
+VW_W1         1 2 0V
+.MODEL         _W1 ISWITCH Roff=1e6 Ron=1.0 Ioff=0.0mA Ion=1mA
+.ends SCHEMATIC1_W1

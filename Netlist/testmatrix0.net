@@ -1,0 +1,12 @@
+V_V1 A GND
+R_R1 A B
+R_R2 A C
+R_R3 B D
+R_R4 B E
+R_R5 D E
+R_R6 E F
+R_R7 C F
+R_R8 C G
+R_R9 F G
+X_U1 D GND
+X_U2 G GND

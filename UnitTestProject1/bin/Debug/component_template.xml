@@ -1,0 +1,386 @@
+<components>
+  <component id="660e174d-3ca5-4c7c-b278-3ef0926693d8" type="N" name="" tagname="连接点" direct="0">
+    <base_position x="0" y="0" width="0" height="0" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="1" y="1" />
+    </outter_connect_points>
+    <inner_connect_points />
+    <shapes />
+  </component>
+  <component id="42adc2f1-905d-46d2-b335-e1383cac9a93" type="R_R" name="" tagname="电阻" direct="0">
+    <base_position x="-50" y="-10" width="100" height="21" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="-50" y="0" />
+      <connect_point name="P2" x="50" y="0" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="R#" x="0" y="0" />
+    </inner_connect_points>
+    <shapes>
+      <rectangle x="-25" y="-10" width="50" height="21" />
+      <line>
+        <p1 x="-50" y="0" />
+        <p2 x="-25" y="0" />
+      </line>
+      <line>
+        <p1 x="25" y="0" />
+        <p2 x="50" y="0" />
+      </line>
+    </shapes>
+  </component>
+  <component id="7deb82f6-6aff-441e-a510-4a0a96e6ba47" type="L_L" name="" tagname="电感" direct="0">
+    <base_position x="-50" y="-12" width="100" height="13" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="-50" y="-1" />
+      <connect_point name="P2" x="50" y="0" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="L#" x="0" y="-1" />
+    </inner_connect_points>
+    <shapes>
+      <line>
+        <p1 x="-50" y="0" />
+        <p2 x="-25" y="0" />
+      </line>
+      <line>
+        <p1 x="-25" y="0" />
+        <p2 x="-25" y="-8" />
+      </line>
+      <line>
+        <p1 x="-25" y="-8" />
+        <p2 x="-20" y="-12" />
+      </line>
+      <line>
+        <p1 x="-20" y="-12" />
+        <p2 x="-15" y="-8" />
+      </line>
+      <line>
+        <p1 x="-15" y="-8" />
+        <p2 x="-10" y="-12" />
+      </line>
+      <line>
+        <p1 x="-10" y="-12" />
+        <p2 x="-5" y="-8" />
+      </line>
+      <line>
+        <p1 x="-5" y="-8" />
+        <p2 x="0" y="-12" />
+      </line>
+      <line>
+        <p1 x="0" y="-12" />
+        <p2 x="4" y="-8" />
+      </line>
+      <line>
+        <p1 x="4" y="-8" />
+        <p2 x="9" y="-12" />
+      </line>
+      <line>
+        <p1 x="9" y="-12" />
+        <p2 x="14" y="-8" />
+      </line>
+      <line>
+        <p1 x="14" y="-8" />
+        <p2 x="19" y="-12" />
+      </line>
+      <line>
+        <p1 x="19" y="-12" />
+        <p2 x="24" y="-8" />
+      </line>
+      <line>
+        <p1 x="24" y="-8" />
+        <p2 x="24" y="0" />
+      </line>
+      <line>
+        <p1 x="24" y="-1" />
+        <p2 x="50" y="-1" />
+      </line>
+    </shapes>
+  </component>
+  <component id="72271baa-0433-4182-aa11-b952b23c2aef" type="D_D" name="" tagname="二极管" direct="0">
+    <base_position x="-49" y="-14" width="100" height="29" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="-48" y="0" />
+      <connect_point name="P2" x="50" y="0" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="D#" x="0" y="0" />
+    </inner_connect_points>
+    <shapes>
+      <line>
+        <p1 x="-49" y="0" />
+        <p2 x="51" y="0" />
+      </line>
+      <line>
+        <p1 x="10" y="-14" />
+        <p2 x="10" y="15" />
+      </line>
+      <line>
+        <p1 x="9" y="-1" />
+        <p2 x="-10" y="-14" />
+      </line>
+      <line>
+        <p1 x="-10" y="-14" />
+        <p2 x="-10" y="15" />
+      </line>
+      <line>
+        <p1 x="-10" y="15" />
+        <p2 x="10" y="0" />
+      </line>
+    </shapes>
+  </component>
+  <component id="0381e126-94ff-4c5d-b027-e1b4f75392b6" type="Q_Q" name="" tagname="三极管" direct="0">
+    <base_position x="-40" y="-35" width="46" height="69" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="5" y="-34" />
+      <connect_point name="P2" x="-40" y="0" />
+      <connect_point name="P3" x="4" y="33" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="Q#C" x="4" y="-19" />
+      <connect_point name="Q#B" x="-20" y="-1" />
+      <connect_point name="Q#E" x="5" y="18" />
+    </inner_connect_points>
+    <shapes>
+      <line>
+        <p1 x="-40" y="0" />
+        <p2 x="-10" y="0" />
+      </line>
+      <line>
+        <p1 x="-10" y="-19" />
+        <p2 x="-10" y="19" />
+      </line>
+      <line>
+        <p1 x="-9" y="-10" />
+        <p2 x="5" y="-19" />
+      </line>
+      <line>
+        <p1 x="5" y="-19" />
+        <p2 x="5" y="-35" />
+      </line>
+      <line>
+        <p1 x="-9" y="10" />
+        <p2 x="5" y="18" />
+      </line>
+      <line>
+        <p1 x="5" y="18" />
+        <p2 x="5" y="34" />
+      </line>
+      <line>
+        <p1 x="4" y="16" />
+        <p2 x="0" y="11" />
+      </line>
+      <line>
+        <p1 x="4" y="18" />
+        <p2 x="-4" y="16" />
+      </line>
+    </shapes>
+  </component>
+  <component id="825cad6c-854c-4dc3-b099-b9af1c1ae5c6" type="V_V" name="" tagname="独立电压源" direct="0">
+    <base_position x="-49" y="-20" width="99" height="40" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="50" y="0" />
+      <connect_point name="P2" x="-50" y="0" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="V#" x="-1" y="0" />
+    </inner_connect_points>
+    <shapes>
+      <line>
+        <p1 x="-49" y="0" />
+        <p2 x="-5" y="0" />
+      </line>
+      <line>
+        <p1 x="5" y="0" />
+        <p2 x="50" y="0" />
+      </line>
+      <line>
+        <p1 x="-5" y="-14" />
+        <p2 x="-5" y="15" />
+      </line>
+      <line>
+        <p1 x="5" y="-20" />
+        <p2 x="5" y="20" />
+      </line>
+    </shapes>
+  </component>
+  <component id="26add507-ff61-4656-9340-7ae7623cdc11" type="X_U" name="" tagname="单掷刀开关" direct="0">
+    <base_position x="-50" y="-11" width="100" height="13" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="-50" y="0" />
+      <connect_point name="P2" x="49" y="0" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="U#" x="0" y="0" />
+    </inner_connect_points>
+    <shapes>
+      <line>
+        <p1 x="-50" y="0" />
+        <p2 x="-15" y="0" />
+      </line>
+      <line>
+        <p1 x="10" y="0" />
+        <p2 x="50" y="0" />
+      </line>
+      <ellipse x="-16" y="-2" width="4" height="4" />
+      <line>
+        <p1 x="-12" y="-1" />
+        <p2 x="8" y="-11" />
+      </line>
+      <ellipse x="8" y="-2" width="4" height="4" />
+    </shapes>
+  </component>
+  <component id="104d47ce-33d3-4297-aa1b-0c93764599a7" type="GND" name="" tagname="地" direct="0">
+    <base_position x="-30" y="-50" width="61" height="60" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="0" y="-50" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="GND#" x="0" y="-1" />
+    </inner_connect_points>
+    <shapes>
+      <line>
+        <p1 x="-30" y="-10" />
+        <p2 x="31" y="-10" />
+      </line>
+      <line>
+        <p1 x="-19" y="-1" />
+        <p2 x="20" y="-1" />
+      </line>
+      <line>
+        <p1 x="-9" y="9" />
+        <p2 x="10" y="9" />
+      </line>
+      <line>
+        <p1 x="0" y="-11" />
+        <p2 x="0" y="-50" />
+      </line>
+    </shapes>
+  </component>
+  <component id="261e9b56-e7c8-485f-86d6-ae5bbb9106f3" type="X_S#" name="" tagname="电压控制开关" direct="0">
+    <base_position x="-49" y="-29" width="100" height="59" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="-49" y="-22" />
+      <connect_point name="P2" x="-49" y="18" />
+      <connect_point name="P3" x="50" y="-20" />
+      <connect_point name="P4" x="50" y="12" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="S#C" x="-19" y="0" />
+      <connect_point name="S#SW" x="15" y="-1" />
+    </inner_connect_points>
+    <shapes>
+      <rectangle x="-29" y="-29" width="61" height="59" />
+      <line>
+        <p1 x="-20" y="-20" />
+        <p2 x="-49" y="-20" />
+      </line>
+      <line>
+        <p1 x="-20" y="20" />
+        <p2 x="-48" y="20" />
+      </line>
+      <line>
+        <p1 x="51" y="-20" />
+        <p2 x="15" y="-20" />
+      </line>
+      <line>
+        <p1 x="49" y="14" />
+        <p2 x="15" y="14" />
+      </line>
+      <line>
+        <p1 x="15" y="14" />
+        <p2 x="-4" y="-14" />
+      </line>
+    </shapes>
+  </component>
+  <component id="03546742-9f60-4339-a658-ce10be227417" type="X_W#" name="" tagname="继电器" direct="0">
+    <base_position x="-48" y="-29" width="97" height="60" />
+    <real_center_point x="460" y="277" />
+    <outter_connect_points>
+      <connect_point name="P1" x="-47" y="-19" />
+      <connect_point name="P2" x="-48" y="18" />
+      <connect_point name="P3" x="49" y="-20" />
+      <connect_point name="P4" x="48" y="16" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="W#C" x="-20" y="0" />
+      <connect_point name="W#SW" x="10" y="-1" />
+    </inner_connect_points>
+    <shapes>
+      <rectangle x="-30" y="-29" width="60" height="60" />
+      <line>
+        <p1 x="-48" y="-19" />
+        <p2 x="-20" y="-19" />
+      </line>
+      <line>
+        <p1 x="-20" y="-19" />
+        <p2 x="-20" y="19" />
+      </line>
+      <line>
+        <p1 x="-20" y="19" />
+        <p2 x="-48" y="19" />
+      </line>
+      <line>
+        <p1 x="-26" y="5" />
+        <p2 x="-21" y="17" />
+      </line>
+      <line>
+        <p1 x="-21" y="17" />
+        <p2 x="-20" y="18" />
+      </line>
+      <line>
+        <p1 x="-20" y="18" />
+        <p2 x="-16" y="5" />
+      </line>
+      <line>
+        <p1 x="10" y="-19" />
+        <p2 x="49" y="-20" />
+      </line>
+      <line>
+        <p1 x="49" y="17" />
+        <p2 x="11" y="17" />
+      </line>
+      <line>
+        <p1 x="11" y="17" />
+        <p2 x="-8" y="-14" />
+      </line>
+    </shapes>
+  </component>
+  <component id="39d824d6-83ee-42b0-92aa-125ac32639c9" type="C_C" name="" tagname="电容" direct="0">
+    <base_position x="-51" y="-30" width="100" height="61" />
+    <real_center_point x="460" y="307" />
+    <outter_connect_points>
+      <connect_point name="P1" x="-50" y="-2" />
+      <connect_point name="P2" x="48" y="-3" />
+    </outter_connect_points>
+    <inner_connect_points>
+      <connect_point name="C#" x="1" y="0" />
+    </inner_connect_points>
+    <shapes>
+      <line>
+        <p1 x="-10" y="-30" />
+        <p2 x="-10" y="31" />
+      </line>
+      <line>
+        <p1 x="11" y="-30" />
+        <p2 x="10" y="29" />
+      </line>
+      <line>
+        <p1 x="-11" y="-2" />
+        <p2 x="-51" y="-3" />
+      </line>
+      <line>
+        <p1 x="12" y="-2" />
+        <p2 x="49" y="-2" />
+      </line>
+    </shapes>
+  </component>
+</components>

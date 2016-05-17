@@ -1,0 +1,7 @@
+* Schematics Netlist *
+V_V1 A GND
+X_U1 A B
+X_U3 B C
+R_R1 B GND
+R_R2 C GND
+X_U2 A C

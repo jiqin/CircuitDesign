@@ -1,0 +1,128 @@
+<root>
+  <circuit>
+    <components_>
+      <component id="80fe8ed4-9c16-47d8-8c0b-a04799e7cd4b" type="V_V" name="V_V1" tagname="独立电压源" direct="0">
+        <base_position x="-49" y="-20" width="99" height="40" />
+        <real_center_point x="279" y="156" />
+        <outter_connect_points>
+          <connect_point name="P1" x="50" y="0" />
+          <connect_point name="P2" x="-50" y="0" />
+        </outter_connect_points>
+        <inner_connect_points>
+          <connect_point name="V#" x="-1" y="0" />
+        </inner_connect_points>
+        <shapes>
+          <line>
+            <p1 x="-49" y="0" />
+            <p2 x="-5" y="0" />
+          </line>
+          <line>
+            <p1 x="5" y="0" />
+            <p2 x="50" y="0" />
+          </line>
+          <line>
+            <p1 x="-5" y="-14" />
+            <p2 x="-5" y="15" />
+          </line>
+          <line>
+            <p1 x="5" y="-20" />
+            <p2 x="5" y="20" />
+          </line>
+        </shapes>
+      </component>
+      <component id="d5a7672a-7128-4e48-9459-96a10eaa8719" type="GND" name="GND1" tagname="地" direct="0">
+        <base_position x="-30" y="-50" width="61" height="60" />
+        <real_center_point x="203" y="378" />
+        <outter_connect_points>
+          <connect_point name="P1" x="0" y="-50" />
+        </outter_connect_points>
+        <inner_connect_points>
+          <connect_point name="GND#" x="0" y="-1" />
+        </inner_connect_points>
+        <shapes>
+          <line>
+            <p1 x="-30" y="-10" />
+            <p2 x="31" y="-10" />
+          </line>
+          <line>
+            <p1 x="-19" y="-1" />
+            <p2 x="20" y="-1" />
+          </line>
+          <line>
+            <p1 x="-9" y="9" />
+            <p2 x="10" y="9" />
+          </line>
+          <line>
+            <p1 x="0" y="-11" />
+            <p2 x="0" y="-50" />
+          </line>
+        </shapes>
+      </component>
+      <component id="780e527e-f154-4434-bfa2-d86ba35b8729" type="D_D" name="D_D1" tagname="二极管" direct="0">
+        <base_position x="-49" y="-14" width="100" height="29" />
+        <real_center_point x="474" y="131" />
+        <outter_connect_points>
+          <connect_point name="P1" x="-48" y="0" />
+          <connect_point name="P2" x="50" y="0" />
+        </outter_connect_points>
+        <inner_connect_points>
+          <connect_point name="D#" x="0" y="0" />
+        </inner_connect_points>
+        <shapes>
+          <line>
+            <p1 x="-49" y="0" />
+            <p2 x="51" y="0" />
+          </line>
+          <line>
+            <p1 x="10" y="-14" />
+            <p2 x="10" y="15" />
+          </line>
+          <line>
+            <p1 x="9" y="-1" />
+            <p2 x="-10" y="-14" />
+          </line>
+          <line>
+            <p1 x="-10" y="-14" />
+            <p2 x="-10" y="15" />
+          </line>
+          <line>
+            <p1 x="-10" y="15" />
+            <p2 x="10" y="0" />
+          </line>
+        </shapes>
+      </component>
+      <component id="8361ba73-bfdd-46d9-959d-6c40657a2700" type="N" name="GND1" tagname="连接点" direct="0">
+        <base_position x="0" y="0" width="0" height="0" />
+        <real_center_point x="190" y="241" />
+        <outter_connect_points>
+          <connect_point name="P1" x="1" y="1" />
+        </outter_connect_points>
+        <inner_connect_points />
+        <shapes />
+      </component>
+      <component id="ddf005a9-401a-4fb4-8a1b-b758a2ea6a99" type="N" name="N0002" tagname="连接点" direct="0">
+        <base_position x="0" y="0" width="0" height="0" />
+        <real_center_point x="377" y="143" />
+        <outter_connect_points>
+          <connect_point name="P1" x="1" y="1" />
+        </outter_connect_points>
+        <inner_connect_points />
+        <shapes />
+      </component>
+    </components_>
+    <connection_lines>
+      <line node="8361ba73-bfdd-46d9-959d-6c40657a2700" component="80fe8ed4-9c16-47d8-8c0b-a04799e7cd4b" component_link_index="1" node_line_to_x="True" />
+      <line node="8361ba73-bfdd-46d9-959d-6c40657a2700" component="d5a7672a-7128-4e48-9459-96a10eaa8719" component_link_index="0" node_line_to_x="True" />
+      <line node="ddf005a9-401a-4fb4-8a1b-b758a2ea6a99" component="80fe8ed4-9c16-47d8-8c0b-a04799e7cd4b" component_link_index="0" node_line_to_x="True" />
+      <line node="ddf005a9-401a-4fb4-8a1b-b758a2ea6a99" component="780e527e-f154-4434-bfa2-d86ba35b8729" component_link_index="0" node_line_to_x="True" />
+      <line node="8361ba73-bfdd-46d9-959d-6c40657a2700" component="780e527e-f154-4434-bfa2-d86ba35b8729" component_link_index="1" node_line_to_x="True" />
+    </connection_lines>
+  </circuit>
+  <network>V_V1 A GND
+X_U1 A B
+X_U3 B C
+R_R1 B GND
+R_R2 C GND
+X_U2 A C
+</network>
+</root>

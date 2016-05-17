@@ -1,0 +1,6 @@
+V_V1 A GND
+X_U1 A B
+R_R1 B C
+R_R2 B D
+R_R3 C GND
+R_R4 D GND
