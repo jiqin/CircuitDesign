@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CircuitDesign
 {
-    public partial class EditComponentDlg : Form
+    public partial class EditComponentForm : Form
     {
         private List<string> componentname_s_ = new List<string>();
         public BaseComponent new_component = null;
@@ -42,7 +42,7 @@ namespace CircuitDesign
             AddOutterPoint,
         };
 
-        public EditComponentDlg()
+        public EditComponentForm()
         {
             InitializeComponent();
             SetStyle(ControlStyles.UserPaint, true);
@@ -266,7 +266,7 @@ namespace CircuitDesign
                         }
                         else
                         {
-                            ChangeNameDlg dlg = new ChangeNameDlg();
+                            ChangeComponentNameForm dlg = new ChangeComponentNameForm();
                             dlg.Text = "设置内部连接点名称";
                             dlg.ShowDialog();
 
@@ -439,7 +439,7 @@ namespace CircuitDesign
                 node_names.Add(cp.name);
             }
 
-            CreateConnectionRelation dlg = new CreateConnectionRelation();
+            CreateConnectionRelationForm dlg = new CreateConnectionRelationForm();
             dlg.InitData(node_names, connect_relations_);
             dlg.ShowDialog();
             dlg.GetRelation(ref connect_relations_);

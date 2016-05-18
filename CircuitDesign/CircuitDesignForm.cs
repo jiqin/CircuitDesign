@@ -330,7 +330,7 @@ namespace CircuitDesign
         private void toolStripButton_add_component_Click(object sender, EventArgs e)
         {
             resetComponent();
-            ListComponentDlg dlg = new ListComponentDlg();
+            ListComponentForm dlg = new ListComponentForm();
             dlg.InitComponents(_componentManager.GetTemplate(), false);
             dlg.ShowDialog();
             if (dlg.selected_component != null)
@@ -693,7 +693,7 @@ namespace CircuitDesign
                     {
                         Debug.Assert(_selectedComponent != null);
 
-                        ChangeNameDlg dlg = new ChangeNameDlg();
+                        ChangeComponentNameForm dlg = new ChangeComponentNameForm();
                         dlg.name = _selectedComponent.Name;
                         dlg.ShowDialog();
                         if (!dlg.name.StartsWith("GND") && _componentManager.HasName(dlg.name))
@@ -724,7 +724,7 @@ namespace CircuitDesign
         private void toolStripButton_add_remove_component_Click(object sender, EventArgs e)
         {
             resetComponent();
-            ListComponentDlg dlg = new ListComponentDlg();
+            ListComponentForm dlg = new ListComponentForm();
             dlg.InitComponents(_componentManager.GetTemplate(), true);
             dlg.ShowDialog();
         }

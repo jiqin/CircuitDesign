@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace CircuitDesign
 {
-    public partial class ChangeNameDlg : Form
+    public partial class ChangeComponentNameForm : Form
     {
         public string name = "";
-        public ChangeNameDlg()
+        public ChangeComponentNameForm()
         {
             InitializeComponent();
         }

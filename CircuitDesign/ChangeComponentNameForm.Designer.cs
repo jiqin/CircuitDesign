@@ -1,6 +1,6 @@
 ﻿namespace CircuitDesign
 {
-    partial class ChangeNameDlg
+    partial class ChangeComponentNameForm
     {
         /// <summary>
         /// 必需的设计器变量。

@@ -9,12 +9,12 @@ using System.Data.OleDb;
 
 namespace CircuitDesign
 {
-    public partial class ListComponentDlg : Form
+    public partial class ListComponentForm : Form
     {
         private ComponentTemplate template_manager_ = null;
         private List<BaseComponent> components_ = null;
         public BaseComponent selected_component = null;
-        public ListComponentDlg()
+        public ListComponentForm()
         {
             InitializeComponent();
         }
@@ -83,7 +83,7 @@ namespace CircuitDesign
 
         private void button_add_component_Click(object sender, EventArgs e)
         {
-            EditComponentDlg dlg = new EditComponentDlg();
+            EditComponentForm dlg = new EditComponentForm();
             dlg.InitData(template_manager_.GetTypes(), null);
             dlg.ShowDialog();
 
@@ -171,7 +171,7 @@ namespace CircuitDesign
                 return;
             }
 
-            EditComponentDlg dlg = new EditComponentDlg();
+            EditComponentForm dlg = new EditComponentForm();
             dlg.InitData(template_manager_.GetTypes(), components_[listBox1.SelectedIndex]);
             dlg.ShowDialog();
 

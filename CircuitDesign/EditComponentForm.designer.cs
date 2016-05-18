@@ -1,6 +1,6 @@
 ﻿namespace CircuitDesign
 {
-    partial class EditComponentDlg
+    partial class EditComponentForm
     {
         /// <summary>
         /// 必需的设计器变量。

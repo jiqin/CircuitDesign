@@ -1,6 +1,6 @@
 ﻿namespace CircuitDesign
 {
-    partial class CreateConnectionRelation
+    partial class CreateConnectionRelationForm
     {
         /// <summary>
         /// 必需的设计器变量。

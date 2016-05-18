@@ -10,11 +10,11 @@ using CircuitModels;
 
 namespace CircuitDesign
 {
-    public partial class FormInput : Form
+    public partial class InputSwitchLoadStatesForm : Form
     {
         private List<SwitchLoadStatesInput> _states = new List<SwitchLoadStatesInput>();
 
-        public FormInput()
+        public InputSwitchLoadStatesForm()
         {
             InitializeComponent();
         }

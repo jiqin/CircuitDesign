@@ -12,7 +12,7 @@ using CircuitDesign;
 
 namespace CircuitDesign
 {
-    public partial class FormMain : Form
+    public partial class MainForm : Form
     {
         string component_model_file_path = "Resources\\component_model.mdb";
         string circuit_template_file_path = "Resources\\component_template.xml";
@@ -27,7 +27,7 @@ namespace CircuitDesign
 
         CircuitNetworkManager circuit_network_manager;
 
-        public FormMain()
+        public MainForm()
         {
             InitializeComponent();
             circuit_network_manager = new CircuitNetworkManager(component_model_file_path, circuit_template_file_path);
@@ -75,7 +75,7 @@ namespace CircuitDesign
 
         private void init_data_grid_view_circuit_states()
         {
-            FormInput.init_data_grid_view(
+            InputSwitchLoadStatesForm.init_data_grid_view(
                 dataGridView_circuit_states,
                 true,
                 circuit_network_manager.get_switch_load_names(),
@@ -185,7 +185,7 @@ namespace CircuitDesign
             ComponentTemplate ct = circuit_network_manager.get_circuit_component_template();
             if (ct != null)
             {
-                CircuitDesign.ListComponentDlg dlg = new CircuitDesign.ListComponentDlg();
+                CircuitDesign.ListComponentForm dlg = new CircuitDesign.ListComponentForm();
                 dlg.InitComponents(ct, true);
                 dlg.ShowDialog();
             }
@@ -193,7 +193,7 @@ namespace CircuitDesign
 
         private void ToolStripMenuItem_input_states_Click(object sender, EventArgs e)
         {
-            FormInput input_dlg = new FormInput();
+            InputSwitchLoadStatesForm input_dlg = new InputSwitchLoadStatesForm();
             input_dlg.Init(circuit_network_manager.get_switch_load_names(), circuit_network_manager.get_switch_load_states());
             input_dlg.ShowDialog();
 

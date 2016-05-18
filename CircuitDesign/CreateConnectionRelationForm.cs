@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CircuitDesign
 {
-    public partial class CreateConnectionRelation : Form
+    public partial class CreateConnectionRelationForm : Form
     {
         private string[] nodenames_;
         private int[,] relations_;
@@ -18,7 +18,7 @@ namespace CircuitDesign
         private const int CELL_W = 80;
         private const int CELL_H = 30;
 
-        public CreateConnectionRelation()
+        public CreateConnectionRelationForm()
         {
             InitializeComponent();
             SetStyle(ControlStyles.UserPaint, true);

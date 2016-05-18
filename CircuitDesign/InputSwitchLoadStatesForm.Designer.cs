@@ -1,6 +1,6 @@
 ﻿namespace CircuitDesign
 {
-    partial class FormInput
+    partial class InputSwitchLoadStatesForm
     {
         /// <summary>
         /// 必需的设计器变量。
