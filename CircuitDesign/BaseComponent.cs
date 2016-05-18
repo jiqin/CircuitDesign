@@ -240,10 +240,13 @@ namespace CircuitDesign
 
             for (int i = 0; i < outter_connect_points_.Count; i++)
             {
-                g.FillEllipse(brush, LinkPointRect(i));
+                g.FillEllipse(brush, LinkPointRect(i, scale));
                 if (LinkPointNum > 1)
                 {
-                    g.DrawString(outter_connect_points_[i].name, SystemFonts.DefaultFont, brush, LinkPoint(i).X, LinkPoint(i).Y + 4, sf);
+                    g.DrawString(outter_connect_points_[i].name, 
+                        SystemFonts.DefaultFont, brush, 
+                        LinkPoint(i, scale).X,
+                        LinkPoint(i, scale).Y + 4, sf);
                 }
             }
 
@@ -269,7 +272,7 @@ namespace CircuitDesign
         {
             for (int i = 0; i < outter_connect_points_.Count; ++i)
             {
-                if (LinkPointRect(i).Contains(pt))
+                if (LinkPointRect(i, 1).Contains(pt))
                 {
                     return i;
                 }
@@ -285,15 +288,16 @@ namespace CircuitDesign
             }
         }
 
-        public Point LinkPoint(int index)
+        public Point LinkPoint(int index, float scale)
         {
             return DesignTools.OffsetPoint (
-                DesignTools.RotatePoint(outter_connect_points_[index].pt, new Point(0, 0), direct_), GetCenterPt());
+                DesignTools.ZoomPoint(
+                DesignTools.RotatePoint(outter_connect_points_[index].pt, new Point(0, 0), direct_), scale), GetCenterPt());
         }
 
-        public Rectangle LinkPointRect(int index)
+        public Rectangle LinkPointRect(int index, float scale)
         {
-            return DesignTools.CreateRectangelByCenterPt(LinkPoint(index), LINK_POINT_RADIUS);
+            return DesignTools.CreateRectangelByCenterPt(LinkPoint(index, scale), LINK_POINT_RADIUS);
         }
 
         public void SetOutConnectPoint(List<ConnectPoint> pts)
@@ -664,7 +668,7 @@ namespace CircuitDesign
             points.Clear();
             if (node != null)
             {
-                Point p1 = node.LinkPoint(0);
+                Point p1 = node.LinkPoint(0, 1);
                 points.Add(p1);
                 if (node_line_to_x)
                 {
@@ -677,7 +681,7 @@ namespace CircuitDesign
             }
             else if (component != null)
             {
-                Point p1 = component.LinkPoint(component_connection_point_index);
+                Point p1 = component.LinkPoint(component_connection_point_index, 1);
                 points.Add(p1);
                 if (node_line_to_x)
                 {
@@ -696,8 +700,8 @@ namespace CircuitDesign
             points.Clear();
             if (node != null && component != null)
             {
-                Point p1 = node.LinkPoint(0);
-                Point p2 = component.LinkPoint(component_connection_point_index);
+                Point p1 = node.LinkPoint(0, 1);
+                Point p2 = component.LinkPoint(component_connection_point_index, 1);
                 points.Add(p1);
                 if (node_line_to_x)
                 {

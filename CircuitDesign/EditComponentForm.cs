@@ -407,24 +407,27 @@ namespace CircuitDesign
                 shape_ellipse_to_add_.Draw(g, pen1, 0, scale_, center_pt);
             }
 
-            StringFormat sf = new StringFormat();
-            sf.Alignment = StringAlignment.Center;
-
             foreach(ConnectPoint cp in inner_points_)
             {
-                SolidBrush brush = new SolidBrush(Color.Blue);
-                Point pt = LogicalToDevicePoint(cp.pt);
-                g.FillEllipse(brush, DesignTools.CreateRectangelByCenterPt(pt, 4));
-                g.DrawString(cp.name, SystemFonts.DefaultFont, brush, pt.X, pt.Y + 5, sf);
+                _draw_connect_point(g, cp);
             }
 
             foreach (ConnectPoint cp in outter_points_)
             {
-                SolidBrush brush = new SolidBrush(Color.Blue);
-                Point pt = LogicalToDevicePoint(cp.pt);
-                g.FillEllipse(brush, DesignTools.CreateRectangelByCenterPt(pt, 4));
-                g.DrawString(cp.name, SystemFonts.DefaultFont, brush, pt.X, pt.Y + 5, sf);
+                _draw_connect_point(g, cp);
             }
+        }
+
+        private void _draw_connect_point(Graphics g, ConnectPoint cp)
+        {
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+
+            SolidBrush brush = new SolidBrush(Color.Blue);
+            Point pt = LogicalToDevicePoint(cp.pt);
+            pt = new Point((int)(pt.X * scale_), (int)(pt.Y * scale_));
+            g.FillEllipse(brush, DesignTools.CreateRectangelByCenterPt(pt, 4));
+            g.DrawString(cp.name, SystemFonts.DefaultFont, brush, pt.X, pt.Y + 5, sf);
         }
 
         private void button_set_connect_relation_Click(object sender, EventArgs e)

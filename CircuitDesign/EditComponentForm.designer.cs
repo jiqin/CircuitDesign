@@ -365,7 +365,7 @@
             this.button_zoom_out.UseVisualStyleBackColor = true;
             this.button_zoom_out.Click += new System.EventHandler(this.button_zoom_out_Click);
             // 
-            // EditComponentDlg
+            // EditComponentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -374,7 +374,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox_scale);
-            this.Name = "EditComponentDlg";
+            this.Name = "EditComponentForm";
             this.Text = "编辑元件";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AddComponentTemplateDlg_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddComponentTemplateDlg_MouseClick);
