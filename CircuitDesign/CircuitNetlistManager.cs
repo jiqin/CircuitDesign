@@ -17,12 +17,13 @@ namespace CircuitDesign
     class CircuitNetlistManager
     {
         CircuitNetlistModel _circuit_list_model;
-        string _component_model_file_path;
         string _circuit_template_file_path;
+
+        NetlistComponentTemplateManager netlist_component_manager_ = new NetlistComponentTemplateManager();
 
         public CircuitNetlistManager(string component_model_file_path, string circuit_template_file_path)
         {
-            _component_model_file_path = component_model_file_path;
+            netlist_component_manager_.LoadTemplates(component_model_file_path);
             _circuit_template_file_path = circuit_template_file_path;
         }
 
@@ -32,7 +33,7 @@ namespace CircuitDesign
             {
                 _circuit_list_model.save();
             }
-            _circuit_list_model = new CircuitNetlistModel(_component_model_file_path, _circuit_template_file_path);
+            _circuit_list_model = new CircuitNetlistModel(netlist_component_manager_, _circuit_template_file_path);
         }
 
         public void new_project()

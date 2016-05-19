@@ -11,9 +11,9 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest1
     {
-        private NetworkModel init_network_model()
+        private NetlistModel init_network_model()
         {
-            NetworkModel network_model = new NetworkModel();
+            NetlistModel network_model = new NetlistModel();
             network_model.LoadTemplates(".\\component_model.mdb");
             network_model.load_network_from_string(File.ReadAllText("Netlist\\Door0.net"));
             return network_model;
@@ -22,7 +22,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethodLoadNetwork()
         {
-            NetworkModel network_model = init_network_model();
+            NetlistModel network_model = init_network_model();
 
             Assert.AreEqual(6, network_model.components.Count);
             Assert.AreEqual("V_V1 A GND", network_model.components[0].toString());

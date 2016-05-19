@@ -17,9 +17,13 @@ namespace CircuitDesign
      */ 
     class CircuitNetlistModel
     {
-        NetworkModel network_model = new NetworkModel();
+        // 网表模型
+        NetlistModel netlist_model = new NetlistModel();
+
+        // 开关负载状态
         List<SwitchLoadStatesInput> switch_load_states = new List<SwitchLoadStatesInput>();
 
+        // 电路图模型
         private CircuitManager circuit_manager = new CircuitManager();
 
         const string xml_node_name_root = "root";
@@ -29,9 +33,9 @@ namespace CircuitDesign
 
         string save_file_name;
 
-        public CircuitNetlistModel(string component_model_file_path, string circuit_template_file_path)
+        public CircuitNetlistModel(NetlistComponentTemplateManager netlist_component_manager_, string circuit_template_file_path)
         {
-            network_model.LoadTemplates(component_model_file_path);
+            netlist_model.LoadTemplates(netlist_component_manager_);
             circuit_manager.InitTemplate(circuit_template_file_path);
         }
 
@@ -92,14 +96,14 @@ namespace CircuitDesign
 
         public void load_network_model_from_string(string s)
         {
-            network_model.load_network_from_string(s);
+            netlist_model.load_network_from_string(s);
 
             switch_load_states = new List<SwitchLoadStatesInput>();
-            foreach (int[] states in CircuitTools.Utils.CreateCombineList(network_model.switch_components.Count))
+            foreach (int[] states in CircuitTools.Utils.CreateCombineList(netlist_model.switch_components.Count))
             {
                 SwitchLoadStatesInput input = new SwitchLoadStatesInput();
                 input.enable = true;
-                input.set_state(states, new int[network_model.r_load_components.Count]);
+                input.set_state(states, new int[netlist_model.r_load_components.Count]);
                 switch_load_states.Add(input);
             }
         }
@@ -117,17 +121,17 @@ namespace CircuitDesign
 
         public string get_network_content()
         {
-            return network_model.get_network_content();
+            return netlist_model.get_network_content();
         }
 
         public List<string> get_switch_load_names()
         {
             List<String> names = new List<string>();
-            foreach (SwtichStruct component in network_model.switch_components)
+            foreach (SwtichStruct component in netlist_model.switch_components)
             {
                 names.Add(component.Name);
             }
-            foreach (RLoadStruct component in network_model.r_load_components)
+            foreach (RLoadStruct component in netlist_model.r_load_components)
             {
                 names.Add(component.Name);
             }
@@ -146,7 +150,7 @@ namespace CircuitDesign
 
         public int get_switch_num()
         {
-            return network_model.switch_components.Count;
+            return netlist_model.switch_components.Count;
         }
 
         public List<AnalyzeResult> analyze()
@@ -164,28 +168,28 @@ namespace CircuitDesign
                 AnalyzeResult analyze_result = new AnalyzeResult();
                 analyze_results.Add(analyze_result);
 
-                analyze_result.network_model = network_model;
+                analyze_result.network_model = netlist_model;
                 analyze_result.index = switch_load_state_index;
                 analyze_result.input = switch_load_state;
 
-                int[,] base_matrix = network_model.CreateMatrix();
-                int[] vector_initial = network_model.CreateVectorInitialAll();
-                int[] vector_final = new int[network_model.node_names.Count];
+                int[,] base_matrix = netlist_model.CreateMatrix();
+                int[] vector_initial = netlist_model.CreateVectorInitialAll();
+                int[] vector_final = new int[netlist_model.node_names.Count];
 
-                int[,] trans_matrix = network_model.CreateTransMatrix(base_matrix, switch_load_state.get_all_states());
-                network_model.networkflow(trans_matrix, network_model.GetMatirxBCNode(base_matrix), vector_initial, vector_final);//网络流仿真
-                MatrixTools.MatrixTool.SolveStarProblem(network_model.node_names, trans_matrix, vector_final);//解决星型连接问题
+                int[,] trans_matrix = netlist_model.CreateTransMatrix(base_matrix, switch_load_state.get_all_states());
+                netlist_model.networkflow(trans_matrix, netlist_model.GetMatirxBCNode(base_matrix), vector_initial, vector_final);//网络流仿真
+                MatrixTools.MatrixTool.SolveStarProblem(netlist_model.node_names, trans_matrix, vector_final);//解决星型连接问题
 
-                analyze_result.load_status = new int[network_model.r_load_components.Count];
-                for (int i = 0; i < network_model.r_load_components.Count; i++)
+                analyze_result.load_status = new int[netlist_model.r_load_components.Count];
+                for (int i = 0; i < netlist_model.r_load_components.Count; i++)
                 {
-                    analyze_result.load_status[i] = vector_final[network_model.r_load_components[i].PositionInNodeList];
+                    analyze_result.load_status[i] = vector_final[netlist_model.r_load_components[i].PositionInNodeList];
                 }
 
                 analyze_result.is_expected_load_status = MatrixTools.MatrixTool.vector_equal(analyze_result.input.get_expected_load_states(), analyze_result.load_status);
 
                 analyze_result.all_paths = new List<List<int>>();
-                network_model.FindPath(network_model.node_names, trans_matrix, analyze_result.all_paths);
+                netlist_model.FindPath(netlist_model.node_names, trans_matrix, analyze_result.all_paths);
             }
             return analyze_results;
         }
@@ -251,7 +255,7 @@ namespace CircuitDesign
                 {
                     if (result.input.get_switch_states()[i] > 0)
                     {
-                        switchs_on.Add(network_model.node_names[network_model.switch_components[i].PositionInNodeList]);
+                        switchs_on.Add(netlist_model.node_names[netlist_model.switch_components[i].PositionInNodeList]);
                     }
                 }
 
@@ -260,8 +264,8 @@ namespace CircuitDesign
                     for (int j = 0; j < path.Count - 1; ++j)
                     {
                         path_lines.Add(new KeyValuePair<string, string>(
-                            network_model.node_names[path[j]],
-                            network_model.node_names[path[j + 1]]));
+                            netlist_model.node_names[path[j]],
+                            netlist_model.node_names[path[j + 1]]));
                     }
                 }
             }

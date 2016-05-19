@@ -89,81 +89,82 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\BaseComponent.cs" />
-    <Compile Include="ChangeComponentNameForm.cs">
+    <Compile Include="CircuitDiagram\BaseComponent.cs" />
+    <Compile Include="Forms\ChangeComponentNameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeComponentNameForm.Designer.cs">
+    <Compile Include="Forms\ChangeComponentNameForm.Designer.cs">
       <DependentUpon>ChangeComponentNameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CircuitManager.cs" />
+    <Compile Include="CircuitDiagram\CircuitManager.cs" />
     <Compile Include="CircuitNetlistManager.cs" />
-    <Compile Include="ComponentTemplate.cs" />
-    <Compile Include="CreateConnectionRelationForm.cs">
+    <Compile Include="CircuitDiagram\ComponentTemplate.cs" />
+    <Compile Include="Forms\CreateConnectionRelationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateConnectionRelationForm.Designer.cs">
+    <Compile Include="Forms\CreateConnectionRelationForm.Designer.cs">
       <DependentUpon>CreateConnectionRelationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Netlist\NetlistComponent.cs" />
     <Compile Include="Utils\DesignTools.cs" />
-    <Compile Include="EditComponentForm.cs">
+    <Compile Include="Forms\EditComponentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditComponentForm.designer.cs">
+    <Compile Include="Forms\EditComponentForm.designer.cs">
       <DependentUpon>EditComponentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CircuitDesignForm.cs">
+    <Compile Include="Forms\CircuitDesignForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CircuitDesignForm.Designer.cs">
+    <Compile Include="Forms\CircuitDesignForm.Designer.cs">
       <DependentUpon>CircuitDesignForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InputSwitchLoadStatesForm.cs">
+    <Compile Include="Forms\InputSwitchLoadStatesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InputSwitchLoadStatesForm.Designer.cs" />
+    <Compile Include="Forms\InputSwitchLoadStatesForm.Designer.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListComponentForm.cs">
+    <Compile Include="Forms\ListComponentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListComponentForm.designer.cs">
+    <Compile Include="Forms\ListComponentForm.designer.cs">
       <DependentUpon>ListComponentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MatrixTool.cs" />
-    <Compile Include="Models.cs" />
-    <Compile Include="NetworkModel.cs" />
-    <Compile Include="NetworkStructs.cs" />
+    <Compile Include="Utils\MatrixTool.cs" />
+    <Compile Include="Utils\SwitchLoadStatesInput.cs" />
+    <Compile Include="Netlist\NetlistModel.cs" />
+    <Compile Include="Netlist\NetlistStructs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="CircuitNetlistModel.cs" />
     <Compile Include="AnalyzeResult.cs" />
-    <EmbeddedResource Include="ChangeComponentNameForm.resx">
+    <EmbeddedResource Include="Forms\ChangeComponentNameForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ChangeComponentNameForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateConnectionRelationForm.resx">
+    <EmbeddedResource Include="Forms\CreateConnectionRelationForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CreateConnectionRelationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditComponentForm.resx">
+    <EmbeddedResource Include="Forms\EditComponentForm.resx">
       <DependentUpon>EditComponentForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CircuitDesignForm.resx">
+    <EmbeddedResource Include="Forms\CircuitDesignForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CircuitDesignForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InputSwitchLoadStatesForm.resx" />
+    <EmbeddedResource Include="Forms\InputSwitchLoadStatesForm.resx" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListComponentForm.resx">
+    <EmbeddedResource Include="Forms\ListComponentForm.resx">
       <DependentUpon>ListComponentForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -177,7 +178,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="CircuitDesign_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

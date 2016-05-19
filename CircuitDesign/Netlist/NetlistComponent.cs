@@ -5,18 +5,18 @@ using System.Collections;
 
 namespace CircuitModels
 {
-    public class ComponentStruct
+    public class NetlistComponent
     {
-        public string Type;
-        public string Name;
-        public string[] NodeNames;
-        public int[,] Connections;
-        public string model_set;
-        public string _raw_string;
+        public string Type; // Example: V_V
+        public string Name; // Example: V1
+        public string[] NodeNames;  // 从内节点到外节点名称 Example: [V1, N0004, N0003]
+        public int[,] Connections;  // 节点间连接关系 Example: [[0 1 0], [0 0 0], [0 0 0]]
+        public string model_set;    // Example: Source
+        public string _raw_string;  // Example: V_V1 N0004 N0003
 
-        public ComponentStruct Clone()
+        public NetlistComponent Clone()
         {
-            ComponentStruct com_new = new ComponentStruct();
+            NetlistComponent com_new = new NetlistComponent();
             com_new.Type = this.Type;
             com_new.model_set = this.model_set;
             com_new.Name = this.Name;
@@ -37,55 +37,17 @@ namespace CircuitModels
 
         public string toString()
         {
-            //string s = this.Type + " ";
-            //s += string.Join(" ", this.NodeNames);
-            //return s;
             return _raw_string;
         }
     }
 
-    public class BaseStruct : System.IComparable
+    public class NetlistComponentTemplateManager
     {
-        public string Name;
-        public int PositionInNodeList;
+        private Dictionary<string, NetlistComponent> components_by_type_ = new Dictionary<string,NetlistComponent>();
 
-        public int CompareTo(object y)
+        public List<NetlistComponent> load_components(string data_base_file, string type)
         {
-            return string.Compare(this.Name, ((BaseStruct)y).Name);
-        }
-    }
-
-    public class SwtichStruct : BaseStruct
-    {
-    }
-
-    public class PowerStruct : BaseStruct
-    {
-    }
-
-    public class GroundStruct : BaseStruct
-    {
-    }
-
-    public class RLoadStruct : BaseStruct
-    {
-    }
-
-    public class ControlNode : BaseStruct
-    {
-    }
-
-    public class BeControlledNode : BaseStruct
-    {
-    }
-
-    public class ComponentStructManager
-    {
-        private Dictionary<string, ComponentStruct> components_by_type_ = new Dictionary<string,ComponentStruct>();
-
-        public static List<ComponentStruct> load_components(string data_base_file, string type)
-        {
-            List<ComponentStruct> components = new List<ComponentStruct>();
+            List<NetlistComponent> components = new List<NetlistComponent>();
 
             System.Data.DataSet ds = new System.Data.DataSet();
             {
@@ -103,7 +65,13 @@ namespace CircuitModels
 
             foreach (System.Data.DataRow row in ds.Tables[0].Rows)
             {
-                ComponentStruct cs = new ComponentStruct();
+                /*
+                 * Row: Type, Model Set, Inner Nodes, Outter Nodes, Connection Relations
+                 * 
+                 * Example:
+                 * R_R, Load, R#, N1:N2, 0-1-3:0-2-3
+                 */
+                NetlistComponent cs = new NetlistComponent();
                 cs.Type = (string)row[0];
                 cs.model_set = (string)row[1];
                 string[] inner_node = ((string)row[2]).Split(':');
@@ -134,26 +102,31 @@ namespace CircuitModels
 
         public void LoadTemplates(string data_base_file)
         {
-            List<ComponentStruct> components = load_components(data_base_file, null);
+            List<NetlistComponent> components = load_components(data_base_file, null);
 
-            foreach (ComponentStruct cs in components)
+            foreach (NetlistComponent cs in components)
             {
                 components_by_type_[cs.Type] = cs;
             }
         }
 
-        public ComponentStruct GetComponent(string raw_string)
+        /*
+         * input string format:
+         * Type
+         * 
+         * Example:
+         * V_V1 N0004 N0003
+         */
+        public NetlistComponent GetComponent(string raw_string)
         {
             List<string> s1 = new List<string>(raw_string.Split(' '));
             string type = raw_string.Substring(0, 3);
             if (!components_by_type_.ContainsKey(type))
             {
                 throw new System.Exception(string.Format("不存在的类型 {0}", type));
-                //System.Windows.Forms.MessageBox.Show("不存在的类型 {0}", type);
-                //return null;
             }
-            ComponentStruct com_new = components_by_type_[type].Clone();
-            com_new.Name = s1[0].Substring(2); ;
+            NetlistComponent com_new = components_by_type_[type].Clone();
+            com_new.Name = s1[0].Substring(2);
             com_new._raw_string = raw_string;
 
             string component_id = s1[0].Substring(3);
@@ -164,11 +137,13 @@ namespace CircuitModels
                 string node = com_new.NodeNames[i];
                 if (node != null)
                 {
+                    // Example: V# => V1, V2, V3
                     inner_node_num++;
                     com_new.NodeNames[i] = node.Replace("#", component_id);
                 }
                 else
                 {
+                    // Example: N0004, N0003
                     com_new.NodeNames[i] = s1[i - inner_node_num + 1];
                 }
             }

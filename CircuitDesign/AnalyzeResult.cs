@@ -21,7 +21,7 @@ namespace CircuitDesign
         public int[] load_status;
         public bool is_expected_load_status;
         public List<List<int>> all_paths;
-        public NetworkModel network_model;
+        public NetlistModel network_model;
 
         const string new_line = "\r\n";
 

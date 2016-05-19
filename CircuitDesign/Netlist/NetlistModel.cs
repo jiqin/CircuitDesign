@@ -7,10 +7,13 @@ using System.Diagnostics;
 
 namespace CircuitModels
 {
-    public class NetworkModel
+    /*
+     * 网表模型
+     */
+    public class NetlistModel
     {
         public List<string> node_names = new List<string>();//存放电路模型的所有“点”
-        public List<ComponentStruct> components = new List<ComponentStruct>();//存放电路中所有元件
+        public List<NetlistComponent> components = new List<NetlistComponent>();//存放电路中所有元件
         public List<PowerStruct> power_components = new List<PowerStruct>();//存放电路中的电源
         public List<GroundStruct> ground_components = new List<GroundStruct>();//存放电路中的地
         public List<SwtichStruct> switch_components = new List<SwtichStruct>();//存放电路中的单掷刀开关
@@ -18,13 +21,13 @@ namespace CircuitModels
         public List<ControlNode> c_node_components = new List<ControlNode>();//存放控制结点
         public List<BeControlledNode> bc_node_components = new List<BeControlledNode>();//存放受控结点
 
-        ComponentStructManager component_struct_manager_ = new ComponentStructManager();
+        NetlistComponentTemplateManager netlist_component_manager_;
 
         const string new_line = "\r\n";
 
-        public void LoadTemplates(String fileName)
+        public void LoadTemplates(NetlistComponentTemplateManager netlist_component_manager)
         {
-            component_struct_manager_.LoadTemplates(fileName);
+            netlist_component_manager_ = netlist_component_manager;
         }
 
         public void Initialize()
@@ -69,7 +72,7 @@ namespace CircuitModels
                     continue;
                 }
 
-                ComponentStruct ComAdd = component_struct_manager_.GetComponent(readline);
+                NetlistComponent ComAdd = netlist_component_manager_.GetComponent(readline);
                 components.Add(ComAdd);
                 for (int i1 = 0; i1 < ComAdd.NodeNames.Length; i1++)
                 {
@@ -133,7 +136,7 @@ namespace CircuitModels
         public string get_network_content()
         {
             String contents = "";
-            foreach (ComponentStruct cs in components)
+            foreach (NetlistComponent cs in components)
             {
                 contents += cs.toString();
                 contents += new_line;
