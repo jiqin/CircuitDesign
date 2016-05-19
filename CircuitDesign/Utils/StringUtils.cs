@@ -6,6 +6,9 @@ namespace CircuitTools
 {
     public class Utils
     {
+        /*
+         * 连接字符串
+         */
         public static string Join(int[,] m, string sp_col, string sp_row)
         {
             string s = "";

@@ -9,26 +9,27 @@ namespace CircuitDesign
 {
     public class BaseComponent
     {
-        protected string id_;
-        protected string type_;
-        protected string name_;
-        protected string tagname_;
-        protected string model_set_;
+        protected string id_;   // UUID, 唯一标准该组件
+        protected string type_; // 元件类型, 例如: N, R_R, L_L, ...
+        protected string tagname_;  // 元件类型, 例如: 连接点, 电阻, 电感
+        protected string name_; // 元件名, 例如: N1, N2, R_R1, R_R2
 
-        protected Color normal_color_ = Color.Blue;
-        protected Color select_color_ = Color.Red;
-        protected Color path_color_ = Color.Green;
+        protected string model_set_;   // 元件类别, 例如 Const (不变状态元件), Load (不变状态元件(负载))
 
-        protected List<BaseShape> shapes_ = new List<BaseShape>();
-        protected Rectangle base_position_;
-        protected Point real_center_point_;
+        protected Color normal_color_ = Color.Blue; // 正常显示颜色
+        protected Color select_color_ = Color.Red;  // 被选中颜色
+        protected Color path_color_ = Color.Green;  // 通路颜色
+
+        protected List<BaseShape> shapes_ = new List<BaseShape>();  // 形状列表
+        protected Rectangle base_position_; // 外框
+        protected Point real_center_point_; // 位置中心
         protected int direct_ = 0; //0: Up, 1:Right, 2:Down, 3:Left
 
-        protected List<ConnectPoint> outter_connect_points_ = new List<ConnectPoint>();
-        protected List<ConnectPoint> inner_connect_points_ = new List<ConnectPoint>();
+        protected List<ConnectPoint> outter_connect_points_ = new List<ConnectPoint>(); // 外连接点
+        protected List<ConnectPoint> inner_connect_points_ = new List<ConnectPoint>(); // 内连接点
         protected const int LINK_POINT_RADIUS = 4;
 
-        protected List<ConnectLine> connect_lines_ = new List<ConnectLine>();
+        protected List<ConnectLine> connect_lines_ = new List<ConnectLine>(); // 元件相关的连接线
 
         public string ID
         {

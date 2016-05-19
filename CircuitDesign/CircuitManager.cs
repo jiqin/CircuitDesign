@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace CircuitDesign
 {
+    /*
+     * 电路图管理类
+     */
     public class CircuitManager
     {
         private ComponentTemplate _template;

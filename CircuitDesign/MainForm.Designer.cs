@@ -47,13 +47,13 @@
             this.ToolStripMenuItem_output_text = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_output_pic = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox_network = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_netlist = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel_cricuit = new System.Windows.Forms.Panel();
+            this.panel_cricuit_diagram = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView_circuit_states = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.treeView_reslt = new System.Windows.Forms.TreeView();
+            this.treeView_simulate_result = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -209,7 +209,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.richTextBox_network);
+            this.groupBox1.Controls.Add(this.richTextBox_netlist);
             this.groupBox1.Location = new System.Drawing.Point(12, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(443, 240);
@@ -217,17 +217,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "网表文件";
             // 
-            // richTextBox_network
+            // richTextBox_netlist
             // 
-            this.richTextBox_network.Location = new System.Drawing.Point(6, 20);
-            this.richTextBox_network.Name = "richTextBox_network";
-            this.richTextBox_network.Size = new System.Drawing.Size(431, 214);
-            this.richTextBox_network.TabIndex = 0;
-            this.richTextBox_network.Text = "";
+            this.richTextBox_netlist.Location = new System.Drawing.Point(6, 20);
+            this.richTextBox_netlist.Name = "richTextBox_netlist";
+            this.richTextBox_netlist.Size = new System.Drawing.Size(431, 214);
+            this.richTextBox_netlist.TabIndex = 0;
+            this.richTextBox_netlist.Text = "";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel_cricuit);
+            this.groupBox2.Controls.Add(this.panel_cricuit_diagram);
             this.groupBox2.Location = new System.Drawing.Point(461, 28);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(568, 240);
@@ -235,12 +235,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "网表文件对应电路图";
             // 
-            // panel_cricuit
+            // panel_cricuit_diagram
             // 
-            this.panel_cricuit.Location = new System.Drawing.Point(6, 20);
-            this.panel_cricuit.Name = "panel_cricuit";
-            this.panel_cricuit.Size = new System.Drawing.Size(556, 220);
-            this.panel_cricuit.TabIndex = 0;
+            this.panel_cricuit_diagram.Location = new System.Drawing.Point(6, 20);
+            this.panel_cricuit_diagram.Name = "panel_cricuit_diagram";
+            this.panel_cricuit_diagram.Size = new System.Drawing.Size(556, 220);
+            this.panel_cricuit_diagram.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -250,7 +250,7 @@
             this.groupBox3.Size = new System.Drawing.Size(443, 296);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "电路状态及负载相应";
+            this.groupBox3.Text = "电路状态及负载响应";
             // 
             // dataGridView_circuit_states
             // 
@@ -266,7 +266,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.treeView_reslt);
+            this.groupBox4.Controls.Add(this.treeView_simulate_result);
             this.groupBox4.Location = new System.Drawing.Point(461, 274);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(568, 302);
@@ -274,16 +274,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "仿真结果";
             // 
-            // treeView_reslt
+            // treeView_simulate_result
             // 
-            this.treeView_reslt.Location = new System.Drawing.Point(6, 20);
-            this.treeView_reslt.Name = "treeView_reslt";
-            this.treeView_reslt.Size = new System.Drawing.Size(556, 269);
-            this.treeView_reslt.TabIndex = 2;
-            this.treeView_reslt.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_reslt_NodeMouseClick);
-            this.treeView_reslt.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_reslt_NodeMouseDoubleClick);
+            this.treeView_simulate_result.Location = new System.Drawing.Point(6, 20);
+            this.treeView_simulate_result.Name = "treeView_simulate_result";
+            this.treeView_simulate_result.Size = new System.Drawing.Size(556, 269);
+            this.treeView_simulate_result.TabIndex = 2;
+            this.treeView_simulate_result.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_simulate_result_NodeMouseClick);
+            this.treeView_simulate_result.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_simulate_result_NodeMouseDoubleClick);
             // 
-            // FormMain
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -294,7 +294,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FormMain";
+            this.Name = "MainForm";
             this.Text = "工程项目";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -318,7 +318,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_add_new_network;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_exit;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RichTextBox richTextBox_network;
+        private System.Windows.Forms.RichTextBox richTextBox_netlist;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -334,8 +334,8 @@
         private System.Windows.Forms.ToolStripMenuItem 仿真结果ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_output_text;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_output_pic;
-        private System.Windows.Forms.Panel panel_cricuit;
-        private System.Windows.Forms.TreeView treeView_reslt;
+        private System.Windows.Forms.Panel panel_cricuit_diagram;
+        private System.Windows.Forms.TreeView treeView_simulate_result;
     }
 }
 
