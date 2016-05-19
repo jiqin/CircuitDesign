@@ -6,9 +6,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using CircuitModels;
-using CircuitTools;
-using CircuitDesign;
 
 namespace CircuitDesign
 {
@@ -188,13 +185,11 @@ namespace CircuitDesign
 
         private void ToolStripMenuItem_edit_component_Click(object sender, EventArgs e)
         {
-            ComponentTemplate ct = circuit_netlist_manager.get_circuit_component_template();
-            if (ct != null)
-            {
-                CircuitDesign.ListComponentForm dlg = new CircuitDesign.ListComponentForm();
-                dlg.InitComponents(ct, true);
-                dlg.ShowDialog();
-            }
+            CircuitComponentTemplateManager ct = circuit_netlist_manager.get_circuit_component_template();
+            NetlistComponentTemplateManager nt = circuit_netlist_manager.get_netlist_component_template();
+            ListComponentForm dlg = new ListComponentForm();
+            dlg.InitComponents(ct, nt, true);
+            dlg.ShowDialog();
         }
 
         private void ToolStripMenuItem_input_states_Click(object sender, EventArgs e)

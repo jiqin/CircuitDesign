@@ -98,7 +98,7 @@
     </Compile>
     <Compile Include="CircuitDiagram\CircuitManager.cs" />
     <Compile Include="CircuitNetlistManager.cs" />
-    <Compile Include="CircuitDiagram\ComponentTemplate.cs" />
+    <Compile Include="CircuitDiagram\CircuitComponentTemplateManager.cs" />
     <Compile Include="Forms\CreateConnectionRelationForm.cs">
       <SubType>Form</SubType>
     </Compile>

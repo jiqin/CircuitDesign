@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CircuitModels;
-using CircuitTools;
-using CircuitDesign;
 using System.Drawing;
 using System.IO;
 using System.Xml;
@@ -33,10 +30,12 @@ namespace CircuitDesign
 
         string save_file_name;
 
-        public CircuitNetlistModel(NetlistComponentTemplateManager netlist_component_manager_, string circuit_template_file_path)
+        public CircuitNetlistModel(
+            NetlistComponentTemplateManager netlist_component_manager,
+            CircuitComponentTemplateManager circuit_component_manager)
         {
-            netlist_model.LoadTemplates(netlist_component_manager_);
-            circuit_manager.InitTemplate(circuit_template_file_path);
+            netlist_model.LoadTemplates(netlist_component_manager);
+            circuit_manager.InitTemplate(circuit_component_manager);
         }
 
         public void load_from_project_file(string file_name)
@@ -50,11 +49,6 @@ namespace CircuitDesign
 
             node = (XmlElement)root_node.GetElementsByTagName(xml_node_name_network)[0];
             load_network_model_from_string(node.InnerText);
-        }
-
-        public ComponentTemplate get_circuit_component_template()
-        {
-            return circuit_manager.GetTemplate();
         }
 
         public CircuitManager get_circuit_manager()
@@ -99,7 +93,7 @@ namespace CircuitDesign
             netlist_model.load_network_from_string(s);
 
             switch_load_states = new List<SwitchLoadStatesInput>();
-            foreach (int[] states in CircuitTools.Utils.CreateCombineList(netlist_model.switch_components.Count))
+            foreach (int[] states in Utils.CreateCombineList(netlist_model.switch_components.Count))
             {
                 SwitchLoadStatesInput input = new SwitchLoadStatesInput();
                 input.enable = true;
@@ -178,7 +172,7 @@ namespace CircuitDesign
 
                 int[,] trans_matrix = netlist_model.CreateTransMatrix(base_matrix, switch_load_state.get_all_states());
                 netlist_model.networkflow(trans_matrix, netlist_model.GetMatirxBCNode(base_matrix), vector_initial, vector_final);//网络流仿真
-                MatrixTools.MatrixTool.SolveStarProblem(netlist_model.node_names, trans_matrix, vector_final);//解决星型连接问题
+                MatrixTool.SolveStarProblem(netlist_model.node_names, trans_matrix, vector_final);//解决星型连接问题
 
                 analyze_result.load_status = new int[netlist_model.r_load_components.Count];
                 for (int i = 0; i < netlist_model.r_load_components.Count; i++)
@@ -186,7 +180,7 @@ namespace CircuitDesign
                     analyze_result.load_status[i] = vector_final[netlist_model.r_load_components[i].PositionInNodeList];
                 }
 
-                analyze_result.is_expected_load_status = MatrixTools.MatrixTool.vector_equal(analyze_result.input.get_expected_load_states(), analyze_result.load_status);
+                analyze_result.is_expected_load_status = MatrixTool.vector_equal(analyze_result.input.get_expected_load_states(), analyze_result.load_status);
 
                 analyze_result.all_paths = new List<List<int>>();
                 netlist_model.FindPath(netlist_model.node_names, trans_matrix, analyze_result.all_paths);

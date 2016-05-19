@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CircuitTools
+namespace CircuitDesign
 {
     public class Utils
     {

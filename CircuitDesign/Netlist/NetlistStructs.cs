@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Data.OleDb;
-using CircuitTools;
 using System.Collections;
 
-namespace CircuitModels
+namespace CircuitDesign
 {
     public class BaseStruct : System.IComparable
     {

@@ -331,7 +331,7 @@ namespace CircuitDesign
         {
             resetComponent();
             ListComponentForm dlg = new ListComponentForm();
-            dlg.InitComponents(_componentManager.GetTemplate(), false);
+            dlg.InitComponents(_componentManager.GetTemplate(), null, false);
             dlg.ShowDialog();
             if (dlg.selected_component != null)
             {
@@ -725,7 +725,7 @@ namespace CircuitDesign
         {
             resetComponent();
             ListComponentForm dlg = new ListComponentForm();
-            dlg.InitComponents(_componentManager.GetTemplate(), true);
+            dlg.InitComponents(_componentManager.GetTemplate(), null, true);
             dlg.ShowDialog();
         }
     }

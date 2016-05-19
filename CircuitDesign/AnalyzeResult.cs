@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CircuitModels;
-using CircuitTools;
-using CircuitDesign;
 using System.Drawing;
 using System.IO;
 using System.Xml;
@@ -44,9 +41,9 @@ namespace CircuitDesign
                 "{0}: {1} 预期负载状态 ({2}) {3} 实际负载状态 ({4})",
                 get_result_message_head(),
                 result,
-                MatrixTools.MatrixTool.join_array(input.get_expected_load_states(), " "),
+                MatrixTool.join_array(input.get_expected_load_states(), " "),
                 op,
-                MatrixTools.MatrixTool.join_array(load_status, " ")
+                MatrixTool.join_array(load_status, " ")
                 );
             return message;
         }
@@ -56,7 +53,7 @@ namespace CircuitDesign
             return String.Format(
                 "状态{0} 开关状态 ({1})",
                 index + 1,
-                MatrixTools.MatrixTool.join_array(input.get_switch_states(), " ")
+                MatrixTool.join_array(input.get_switch_states(), " ")
                 );
         }
 

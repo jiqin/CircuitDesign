@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Data.OleDb;
-using CircuitTools;
 using System.Collections;
 
-namespace CircuitModels
+namespace CircuitDesign
 {
     public class NetlistComponent
     {
@@ -43,15 +42,16 @@ namespace CircuitModels
 
     public class NetlistComponentTemplateManager
     {
+        private string _data_base_file;
         private Dictionary<string, NetlistComponent> components_by_type_ = new Dictionary<string,NetlistComponent>();
 
-        public List<NetlistComponent> load_components(string data_base_file, string type)
+        public List<NetlistComponent> load_components(string type)
         {
             List<NetlistComponent> components = new List<NetlistComponent>();
 
             System.Data.DataSet ds = new System.Data.DataSet();
             {
-                OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + data_base_file);
+                OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _data_base_file);
                 conn.Open();
                 string sql = "select * from component";
                 if (type != null)
@@ -100,9 +100,25 @@ namespace CircuitModels
             return components;
         }
 
+        public void SaveRelationsToDatabase(string msg)
+        {
+            OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _data_base_file);
+            conn.Open();
+            string[] datas = msg.Split(',');
+            OleDbCommand command = new OleDbCommand(
+                string.Format("delete component where Type = \"{0}\"", datas[0]), conn);
+            command.ExecuteNonQuery();
+
+            command = new OleDbCommand(
+                string.Format("insert into component values(\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\")", datas[0], datas[1], datas[2], datas[3], datas[4]), conn);
+            command.ExecuteNonQuery();
+            conn.Close();
+        }
+
         public void LoadTemplates(string data_base_file)
         {
-            List<NetlistComponent> components = load_components(data_base_file, null);
+            _data_base_file = data_base_file;
+            List<NetlistComponent> components = load_components(null);
 
             foreach (NetlistComponent cs in components)
             {

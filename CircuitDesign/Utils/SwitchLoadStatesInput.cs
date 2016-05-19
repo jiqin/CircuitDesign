@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CircuitModels
+namespace CircuitDesign
 {
     public class SwitchLoadStatesInput
     {

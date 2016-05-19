@@ -11,7 +11,8 @@ namespace CircuitDesign
 {
     public partial class ListComponentForm : Form
     {
-        private ComponentTemplate template_manager_ = null;
+        private CircuitComponentTemplateManager _circuit_component_template_manager = null;
+        private NetlistComponentTemplateManager _netlist_component_template_manager = null;
         private List<BaseComponent> components_ = null;
         public BaseComponent selected_component = null;
         public ListComponentForm()
@@ -19,21 +20,27 @@ namespace CircuitDesign
             InitializeComponent();
         }
 
-        public void InitComponents(ComponentTemplate template_manager, bool is_edit_component)
+        public void InitComponents(
+            CircuitComponentTemplateManager circuit_component_template_manager, 
+            NetlistComponentTemplateManager netlist_component_template_manager,
+            bool is_edit_component)
         {
             if (!is_edit_component)
             {
                 button_add_component.Visible = false;
                 button_remove_component.Visible = false;
+                button_edit_component.Visible = false;
             }
-            template_manager_ = template_manager;
+            _netlist_component_template_manager = netlist_component_template_manager;
+            _circuit_component_template_manager = circuit_component_template_manager;
+
             ResetComponentList();
         }
 
         private void ResetComponentList()
         {
             listBox1.Items.Clear();
-            components_ = template_manager_.GetTemplateComponents();
+            components_ = _circuit_component_template_manager.GetTemplateComponents();
             foreach (BaseComponent c in components_)
             {
                 string s = string.Format("{0} : {1}", c.Type, c.TagName);
@@ -83,85 +90,7 @@ namespace CircuitDesign
 
         private void button_add_component_Click(object sender, EventArgs e)
         {
-            EditComponentForm dlg = new EditComponentForm();
-            dlg.InitData(template_manager_.GetTypes(), null);
-            dlg.ShowDialog();
-
-            if (dlg.new_component == null)
-            {
-                return;
-            }
-
-            template_manager_.AddComponentTemplate(dlg.new_component);
-            template_manager_.Save();
-            template_manager_.Load();
-            ResetComponentList();
-
-            if (dlg.connection_relation_msg != "")
-            {
-                SaveRelationsToDatabase(Application.StartupPath + "\\component_model.mdb", dlg.connection_relation_msg);
-            }
-        }
-
-        private void SaveRelationsToDatabase(string data_base_file, string msg)
-        {
-            try
-            {
-                OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + data_base_file);
-                conn.Open();
-                string[] datas = msg.Split(',');
-                OleDbCommand command = new OleDbCommand(
-                    string.Format("delete component where Type = \"{0}\"", datas[0]), conn);
-                command.ExecuteNonQuery();
-
-                command = new OleDbCommand(
-                    string.Format("insert into component values(\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\")", datas[0], datas[1], datas[2], datas[3], datas[4]), conn);
-                command.ExecuteNonQuery();
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private string LoadRelationsFromDatabase(string data_base_file, string type)
-        {
-            try
-            {
-                OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + data_base_file);
-                conn.Open();
-
-                OleDbCommand command = new OleDbCommand(
-                    string.Format("select * from component where Type = \"{0}\"", type), conn);
-                OleDbDataReader r = command.ExecuteReader();
-                String relation = null;
-                if (r.HasRows)
-                {
-                    r.Read();
-                    relation = r.GetString(3);
-                }
-                conn.Close();
-                return relation;
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
-                return null;
-            }
-        }
-
-        private void button_remove_component_Click(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedIndex < 0)
-            {
-                return;
-            }
-
-            template_manager_.removeComponentTemplate(components_[listBox1.SelectedIndex].Type);
-            template_manager_.Save();
-            template_manager_.Load();
-            ResetComponentList();
+            add_or_edit_component(_circuit_component_template_manager.GetTypes(), null, null);
         }
 
         private void button_edit_component_Click(object sender, EventArgs e)
@@ -171,8 +100,15 @@ namespace CircuitDesign
                 return;
             }
 
+            BaseComponent component = components_[listBox1.SelectedIndex];
+            List<NetlistComponent> netlist_components = _netlist_component_template_manager.load_components(component.Type);
+            add_or_edit_component(_circuit_component_template_manager.GetTypes(), component, netlist_components[0]);
+        }
+
+        private void add_or_edit_component(List<string> componentname_s, BaseComponent component, NetlistComponent netlist_component)
+        {
             EditComponentForm dlg = new EditComponentForm();
-            dlg.InitData(template_manager_.GetTypes(), components_[listBox1.SelectedIndex]);
+            dlg.InitData(componentname_s, component, netlist_component);
             dlg.ShowDialog();
 
             if (dlg.new_component == null)
@@ -180,16 +116,33 @@ namespace CircuitDesign
                 return;
             }
 
-            template_manager_.removeComponentTemplate(components_[listBox1.SelectedIndex].Type);
-            template_manager_.AddComponentTemplate(dlg.new_component);
-            template_manager_.Save();
-            template_manager_.Load();
-            ResetComponentList();
+            if (component != null)
+            {
+                _circuit_component_template_manager.removeComponentTemplate(component.Type);
+            }
+            _circuit_component_template_manager.AddComponentTemplate(dlg.new_component);
+            _circuit_component_template_manager.Save();
+            _circuit_component_template_manager.Load();
 
             if (dlg.connection_relation_msg != "")
             {
-                SaveRelationsToDatabase(Application.StartupPath + "\\component_model.mdb", dlg.connection_relation_msg);
+                _netlist_component_template_manager.SaveRelationsToDatabase(dlg.connection_relation_msg);
             }
+
+            ResetComponentList();
+        }
+
+        private void button_remove_component_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            _circuit_component_template_manager.removeComponentTemplate(components_[listBox1.SelectedIndex].Type);
+            _circuit_component_template_manager.Save();
+            _circuit_component_template_manager.Load();
+            ResetComponentList();
         }
     }
 }

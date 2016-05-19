@@ -5,8 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using CircuitTools;
-using CircuitModels;
 
 namespace CircuitDesign
 {

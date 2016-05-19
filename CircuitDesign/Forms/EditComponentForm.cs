@@ -72,7 +72,10 @@ namespace CircuitDesign
             draw_shape_rect_ = DesignTools.CreateRectangelByCenterPt(DesignTools.GetRectangleCenterPt(draw_shape_rect_), radius / 2);
         }
 
-        public void InitData(List<string> componentname_s, BaseComponent component)
+        public void InitData(
+            List<string> componentname_s, 
+            BaseComponent component, 
+            NetlistComponent netlist_component)
         {
             componentname_s_.AddRange(componentname_s);
             if (component != null)
@@ -84,6 +87,9 @@ namespace CircuitDesign
                 new_component = new BaseComponent();
             }
             new_component.SetCenterPos(DesignTools.GetRectangleCenterPt(draw_shape_rect_));
+
+            // TODO Ìí¼Óinner_point, outter_point, connections
+
             textBoxtype_.Text = new_component.Type;
             textBox_tagname_.Text = new_component.TagName;
             AutoSetTextboxPosition();

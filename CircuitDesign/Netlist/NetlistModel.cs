@@ -5,7 +5,7 @@ using System.IO;
 using System.Collections;
 using System.Diagnostics;
 
-namespace CircuitModels
+namespace CircuitDesign
 {
     /*
      * 网表模型
@@ -245,18 +245,18 @@ namespace CircuitModels
         {
             int[,] trans_matrix = new int[node_names.Count, node_names.Count];
 
-            MatrixTools.MatrixTool.MatrixCopy(base_matrix, trans_matrix);
+            MatrixTool.MatrixCopy(base_matrix, trans_matrix);
 
             for (int i = 0; i < switch_components.Count; i++)
             {
                 if (switch_states[i] == 0)
                 {
-                    MatrixTools.MatrixTool.MatrixClearRowCol(trans_matrix, switch_components[i].PositionInNodeList);
+                    MatrixTool.MatrixClearRowCol(trans_matrix, switch_components[i].PositionInNodeList);
                 }
             }
             for (int i = 0; i < bc_node_components.Count; ++i)
             {
-                MatrixTools.MatrixTool.MatrixClearRowCol(trans_matrix, bc_node_components[i].PositionInNodeList);
+                MatrixTool.MatrixClearRowCol(trans_matrix, bc_node_components[i].PositionInNodeList);
             }
             return trans_matrix;
         }
@@ -275,13 +275,13 @@ namespace CircuitModels
         //public void networkflow(int[,] mt, int[] v0, int[] vn)//网络流仿真
         //{
         //    int[] vtmp = new int[v0.Length];
-        //    MatrixTools.MatrixTool.vector_assign(vtmp, v0);
-        //    MatrixTools.MatrixTool.vector_reduce(vtmp);
+        //    MatrixTool.vector_assign(vtmp, v0);
+        //    MatrixTool.vector_reduce(vtmp);
 
         //    while (true)
         //    {
-        //        MatrixTools.MatrixTool.vector_mul_matrix(vn, vtmp, mt);
-        //        MatrixTools.MatrixTool.vector_reduce(vn);
+        //        MatrixTool.vector_mul_matrix(vn, vtmp, mt);
+        //        MatrixTool.vector_reduce(vn);
 
         //        if (c_node_components.Count > 0 && c_node_components.Count == bc_node_components.Count)
         //        {
@@ -291,11 +291,11 @@ namespace CircuitModels
         //            }
         //        }
 
-        //        if (MatrixTools.MatrixTool.vector_equal(vn, vtmp))
+        //        if (MatrixTool.vector_equal(vn, vtmp))
         //        {
         //            break;
         //        }
-        //        MatrixTools.MatrixTool.vector_assign(vtmp, vn);
+        //        MatrixTool.vector_assign(vtmp, vn);
         //    }
         //}
 
@@ -308,13 +308,13 @@ namespace CircuitModels
             }
 
             int[] vtmp = new int[v0.Length];
-            MatrixTools.MatrixTool.vector_assign(vtmp, v0);
-            MatrixTools.MatrixTool.vector_reduce(vtmp);
+            MatrixTool.vector_assign(vtmp, v0);
+            MatrixTool.vector_reduce(vtmp);
 
             while (true)
             {
-                MatrixTools.MatrixTool.vector_mul_matrix(vn, vtmp, mt);
-                MatrixTools.MatrixTool.vector_reduce(vn);
+                MatrixTool.vector_mul_matrix(vn, vtmp, mt);
+                MatrixTool.vector_reduce(vn);
 
                 for (int i = 0; i < c_node_components.Count; i++)
                 {
@@ -324,16 +324,16 @@ namespace CircuitModels
                     }
                     else if (vn[c_node_components[i].PositionInNodeList] == 1)
                     {
-                        MatrixTools.MatrixTool.MatirxAdd(mt, mw[i]);
+                        MatrixTool.MatirxAdd(mt, mw[i]);
                     }
                 }
-                MatrixTools.MatrixTool.matrix_reduce(mt);
+                MatrixTool.matrix_reduce(mt);
 
-                if (MatrixTools.MatrixTool.vector_equal(vn, vtmp))
+                if (MatrixTool.vector_equal(vn, vtmp))
                 {
                     break;
                 }
-                MatrixTools.MatrixTool.vector_assign(vtmp, vn);
+                MatrixTool.vector_assign(vtmp, vn);
             }
         }
 

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CircuitModels;
-using CircuitTools;
-using CircuitDesign;
 using System.Drawing;
 using System.IO;
 using System.Xml;
@@ -17,14 +14,25 @@ namespace CircuitDesign
     class CircuitNetlistManager
     {
         CircuitNetlistModel _circuit_list_model;
-        string _circuit_template_file_path;
 
-        NetlistComponentTemplateManager netlist_component_manager_ = new NetlistComponentTemplateManager();
+        NetlistComponentTemplateManager _netlist_component_template_manager = new NetlistComponentTemplateManager();
+        CircuitComponentTemplateManager _circuit_component_template_manager;
 
         public CircuitNetlistManager(string component_model_file_path, string circuit_template_file_path)
         {
-            netlist_component_manager_.LoadTemplates(component_model_file_path);
-            _circuit_template_file_path = circuit_template_file_path;
+            _netlist_component_template_manager.LoadTemplates(component_model_file_path);
+            _circuit_component_template_manager = new CircuitComponentTemplateManager(circuit_template_file_path);
+            _circuit_component_template_manager.Load();
+        }
+
+        public CircuitComponentTemplateManager get_circuit_component_template()
+        {
+            return _circuit_component_template_manager;
+        }
+
+        public NetlistComponentTemplateManager get_netlist_component_template()
+        {
+            return _netlist_component_template_manager;
         }
 
         private void pre_load()
@@ -33,7 +41,7 @@ namespace CircuitDesign
             {
                 _circuit_list_model.save();
             }
-            _circuit_list_model = new CircuitNetlistModel(netlist_component_manager_, _circuit_template_file_path);
+            _circuit_list_model = new CircuitNetlistModel(_netlist_component_template_manager, _circuit_component_template_manager);
         }
 
         public void new_project()
@@ -166,16 +174,7 @@ namespace CircuitDesign
             }
             return _circuit_list_model.get_circuit_image(result);
         }
-
-        public ComponentTemplate get_circuit_component_template()
-        {
-            if (_circuit_list_model == null)
-            {
-                return null;
-            }
-            return _circuit_list_model.get_circuit_component_template();
-        }
-
+        
         public CircuitManager get_circuit_manager()
         {
             if (_circuit_list_model == null)
