@@ -1,10 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CircuitModels;
-using CircuitTools;
 using System.Collections.Generic;
 using System.IO;
-using MatrixTools;
+using CircuitDesign;
 
 namespace UnitTestProject1
 {
@@ -13,8 +11,11 @@ namespace UnitTestProject1
     {
         private NetlistModel init_network_model()
         {
+            NetlistComponentTemplateManager netlist_component_template_manager = new NetlistComponentTemplateManager();
+            netlist_component_template_manager.LoadTemplates(".\\component_model.mdb");
+
             NetlistModel network_model = new NetlistModel();
-            network_model.LoadTemplates(".\\component_model.mdb");
+            network_model.LoadTemplates(netlist_component_template_manager);
             network_model.load_network_from_string(File.ReadAllText("Netlist\\Door0.net"));
             return network_model;
         }
@@ -42,7 +43,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestCreateCombineList()
         {
-            List<int[]> values = CircuitTools.Utils.CreateCombineList(3);
+            List<int[]> values = Utils.CreateCombineList(3);
             Assert.AreEqual(8, values.Count);
             Assert.AreEqual(3, values[0].Length);
 
