@@ -124,9 +124,9 @@ namespace CircuitDesign
             _circuit_component_template_manager.Save();
             _circuit_component_template_manager.Load();
 
-            if (dlg.connection_relation_msg != "")
+            if (dlg.new_netlist_component != null)
             {
-                _netlist_component_template_manager.SaveRelationsToDatabase(dlg.connection_relation_msg);
+                _netlist_component_template_manager.SaveRelationsToDatabase(dlg.new_netlist_component);
             }
 
             ResetComponentList();

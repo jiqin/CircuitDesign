@@ -9,6 +9,8 @@ namespace CircuitDesign
         public string Type; // Example: V_V
         public string Name; // Example: V1
         public string[] NodeNames;  // 从内节点到外节点名称 Example: [V1, N0004, N0003]
+        public string[] inner_names;
+        public string[] outter_names;
         public int[,] Connections;  // 节点间连接关系 Example: [[0 1 0], [0 0 0], [0 0 0]]
         public string model_set;    // Example: Source
         public string _raw_string;  // Example: V_V1 N0004 N0003
@@ -74,45 +76,105 @@ namespace CircuitDesign
                 NetlistComponent cs = new NetlistComponent();
                 cs.Type = (string)row[0];
                 cs.model_set = (string)row[1];
-                string[] inner_node = ((string)row[2]).Split(':');
-                string[] outter_node = ((string)row[3]).Split(':');
-                int n = inner_node.Length + outter_node.Length;
+                cs.inner_names = ((string)row[2]).Split(':');
+                cs.outter_names = ((string)row[3]).Split(':');
+                int n = cs.inner_names.Length + cs.outter_names.Length;
                 cs.NodeNames = new string[n];
-                inner_node.CopyTo(cs.NodeNames, 0);
-
-                cs.Connections = new int[n, n];
-                string[] connections = ((string)row[4]).Split(':');
-                foreach (string connection in connections)
-                {
-                    if (connection.Trim() == "")
-                    {
-                        continue;
-                    }
-                    string[] ss = connection.Split('-');
-                    int n1 = int.Parse(ss[0]);
-                    int n2 = int.Parse(ss[1]);
-                    int v = int.Parse(ss[2]);
-                    cs.Connections[n1, n2] = v;
-                }
+                cs.inner_names.CopyTo(cs.NodeNames, 0);
+                cs.Connections = ConvertStringToConnectionRelation((string)row[4], n);
 
                 components.Add(cs);
             }
             return components;
         }
 
-        public void SaveRelationsToDatabase(string msg)
+        public void SaveRelationsToDatabase(NetlistComponent component)
         {
+            string sep = ":";
             OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _data_base_file);
             conn.Open();
-            string[] datas = msg.Split(',');
             OleDbCommand command = new OleDbCommand(
-                string.Format("delete component where Type = \"{0}\"", datas[0]), conn);
+                string.Format("delete component where Type = \"{0}\"", component.Type), conn);
             command.ExecuteNonQuery();
 
             command = new OleDbCommand(
-                string.Format("insert into component values(\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\")", datas[0], datas[1], datas[2], datas[3], datas[4]), conn);
+                string.Format("insert into component values(\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\")",
+                component.Type, 
+                component.model_set, 
+                string.Join(sep, component.inner_names),
+                string.Join(sep, component.outter_names),
+                ConvertConnectionRelationToString(component.Connections)), 
+                conn);
             command.ExecuteNonQuery();
             conn.Close();
+        }
+
+        public string ConvertConnectionRelationToString(int[,] connect_relations)
+        {
+                List<string> s = new List<string>();
+                for (int i = 0; i < connect_relations.GetLength(0); ++i)
+                {
+                    for (int j = i + 1; j < connect_relations.GetLength(1); ++j)
+                    {
+                        System.Diagnostics.Debug.Assert(connect_relations[i, j] <= 2 && connect_relations[j, i] <= 2);
+                        int v = 0;
+                        if (connect_relations[i, j] == 1)
+                        {
+                            v |= 0x1;
+                        }
+                        if (connect_relations[i, j] == 2)
+                        {
+                            v |= 0x4;
+                        }
+                        if (connect_relations[j, i] == 1)
+                        {
+                            v |= 0x2;
+                        }
+                        if (connect_relations[j, i] == 2)
+                        {
+                            v |= 0x8;
+                        }
+                        if (v > 0)
+                        {
+                            s.Add(string.Format("{0}-{1}-{2}", i, j, v));
+                        }
+                    }
+                }
+                return string.Join(":", s.ToArray());
+        }
+
+        public int[,] ConvertStringToConnectionRelation(string msg, int n)
+        {
+            int[,] r = new int[n, n];
+            string[] connections = msg.Split(':');
+            foreach (string connection in connections)
+            {
+                if (connection.Trim() == "")
+                {
+                    continue;
+                }
+                string[] ss = connection.Split('-');
+                int n1 = int.Parse(ss[0]);
+                int n2 = int.Parse(ss[1]);
+                int v = int.Parse(ss[2]);
+                if ((v & 0x1) != 0)
+                {
+                    r[n1, n2] = 1;
+                }
+                if ((v & 0x4) != 0)
+                {
+                    r[n1, n2] = 2;
+                }
+                if ((v & 0x2) != 0)
+                {
+                    r[n2, n1] = 1;
+                }
+                if ((v & 0x8) != 0)
+                {
+                    r[n2, n1] = 2;
+                }
+            }
+            return r;
         }
 
         public void LoadTemplates(string data_base_file)

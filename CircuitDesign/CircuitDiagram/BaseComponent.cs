@@ -94,6 +94,12 @@ namespace CircuitDesign
             id_ = System.Guid.NewGuid().ToString();
         }
 
+        public BaseComponent Clone()
+        {
+            BaseComponent other = new BaseComponent();
+            return other;
+        }
+
         public XmlElement SaveToXML(XmlDocument doc)
         {
             XmlElement node = doc.CreateElement("component");

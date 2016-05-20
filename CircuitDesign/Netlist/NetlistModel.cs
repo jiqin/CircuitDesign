@@ -204,15 +204,22 @@ namespace CircuitDesign
                         {
                             base_matrix[NodeIndex[m], NodeIndex[n]] = 1;
                         }
-                        else if (components[i].Connections[m, n] == 2)//单向反向边
+                        if (components[i].Connections[n, m] == 1)//单向反向边
                         {
                             base_matrix[NodeIndex[n], NodeIndex[m]] = 1;
                         }
-                        else if (components[i].Connections[m, n] == 3)//双向边
-                        {
-                            base_matrix[NodeIndex[m], NodeIndex[n]] = 1;
-                            base_matrix[NodeIndex[n], NodeIndex[m]] = 1;
-                        }
+
+                        // TODO: 连接关系为2 受控连接设置
+
+                        //else if (components[i].Connections[m, n] == 2)//单向反向边
+                        //{
+                        //    base_matrix[NodeIndex[n], NodeIndex[m]] = 1;
+                        //}
+                        //else if (components[i].Connections[m, n] == 3)//双向边
+                        //{
+                        //    base_matrix[NodeIndex[m], NodeIndex[n]] = 1;
+                        //    base_matrix[NodeIndex[n], NodeIndex[m]] = 1;
+                        //}
                     }
                 }
             }

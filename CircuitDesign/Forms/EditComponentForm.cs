@@ -12,6 +12,7 @@ namespace CircuitDesign
     {
         private List<string> componentname_s_ = new List<string>();
         public BaseComponent new_component = null;
+        public NetlistComponent new_netlist_component = null;
         public string connection_relation_msg = "";
 
         private Rectangle draw_shape_rect_;
@@ -505,71 +506,31 @@ namespace CircuitDesign
             new_component.SetInnerConnectPoint(inner_points_);
             new_component.SetOutConnectPoint(outter_points_);
 
-            SetConnectionRelation();
+            new_netlist_component = new NetlistComponent();
+            new_netlist_component.Type = new_component.Type;
+            new_netlist_component.model_set = new_component.ModelSet;
+            new_netlist_component.inner_names = get_names_from_points(inner_points_);
+            new_netlist_component.outter_names = get_names_from_points(outter_points_);
+            new_netlist_component.Connections = connect_relations_;
         }
 
-        private void SetConnectionRelation()
+        private string[] get_names_from_points(List<ConnectPoint> points)
         {
-            string sep1 = ",";
-            string sep2 = ":";
-            connection_relation_msg = new_component.Type;
-            connection_relation_msg += sep1 + new_component.ModelSet;
+            List<string> s = new List<string>();
+            foreach (ConnectPoint cp in points)
             {
-                List<string> s = new List<string>();
-                foreach (ConnectPoint cp in inner_points_)
-                {
-                    s.Add(cp.name);
-                }
-                connection_relation_msg += sep1 + string.Join(sep2, s.ToArray());
+                s.Add(cp.name);
             }
-            {
-                List<string> s = new List<string>();
-                foreach (ConnectPoint cp in outter_points_)
-                {
-                    s.Add(cp.name);
-                }
-                connection_relation_msg += sep1 + string.Join(sep2, s.ToArray());
-            }
-
-            {
-                List<string> s = new List<string>();
-                for (int i = 0; i < connect_relations_.GetLength(0); ++i)
-                {
-                    for (int j = i + 1; j < connect_relations_.GetLength(1); ++j)
-                    {
-                        System.Diagnostics.Debug.Assert(connect_relations_[i, j] <= 2 && connect_relations_[j, i] <= 2);
-                        int v = 0;
-                        if (connect_relations_[i, j] == 1)
-                        {
-                            v |= 0x1;
-                        }
-                        if (connect_relations_[i, j] == 2)
-                        {
-                            v |= 0x4;
-                        }
-                        if (connect_relations_[j, i] == 1)
-                        {
-                            v |= 0x2;
-                        }
-                        if (connect_relations_[j, i] == 2)
-                        {
-                            v |= 0x8;
-                        }
-                        if (v > 0)
-                        {
-                            s.Add(string.Format("{0}-{1}-{2}", i, j, v));
-                        }
-                    }
-                }
-                connection_relation_msg += sep1 + string.Join(sep2, s.ToArray());
-            }
-
-            this.Close();
+            
+            string[] r = new string[s.Count];
+            s.CopyTo(r);
+            return r;
         }
 
         private void button_cancle_Click(object sender, EventArgs e)
         {
             new_component = null;
+            new_netlist_component = null;
             this.Close();
         }
     }
