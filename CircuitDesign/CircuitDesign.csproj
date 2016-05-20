@@ -106,6 +106,7 @@
       <DependentUpon>CreateConnectionRelationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Netlist\NetlistComponent.cs" />
+    <Compile Include="Utils\CollectionsUtils.cs" />
     <Compile Include="Utils\DesignTools.cs" />
     <Compile Include="Forms\EditComponentForm.cs">
       <SubType>Form</SubType>

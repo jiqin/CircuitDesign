@@ -307,10 +307,20 @@ namespace CircuitDesign
             outter_connect_points_.AddRange(pts);
         }
 
+        public List<ConnectPoint> GetOutterConnectPoint()
+        {
+            return new List<ConnectPoint>(outter_connect_points_);
+        }
+
         public void SetInnerConnectPoint(List<ConnectPoint> pts)
         {
             inner_connect_points_.Clear();
             inner_connect_points_.AddRange(pts);
+        }
+
+        public List<ConnectPoint> GetInnerConnectPoint()
+        {
+            return new List<ConnectPoint>(inner_connect_points_);
         }
 
         public Rectangle Position

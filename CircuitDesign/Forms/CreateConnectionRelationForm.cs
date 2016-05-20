@@ -33,17 +33,17 @@ namespace CircuitDesign
             nodenames.CopyTo(nodenames_);
 
             relations_ = new int[nodenames_.Length, nodenames_.Length];
-            //if (relations != null)
-            //{
-            //    for (int i = 0; i < nodenames_.Length; ++i)
-            //    {
-            //        for (int j = 0; j < nodenames_.Length; ++j)
-            //        {
-            //            relations_[i, j] = relations[i, j];
-            //        }
-            //    }
-            //}
-            //else
+            if (relations != null)
+            {
+                for (int i = 0; i < nodenames_.Length; ++i)
+                {
+                    for (int j = 0; j < nodenames_.Length; ++j)
+                    {
+                        relations_[i, j] = relations[i, j];
+                    }
+                }
+            }
+            else
             {
                 for (int i = 0; i < nodenames_.Length; ++i)
                 {
@@ -101,7 +101,7 @@ namespace CircuitDesign
             brushes[4] = Brushes.Purple;
 
             Pen pen = new Pen(Color.Blue, 2.0f);
-            Font font = new Font(FontFamily.GenericSerif, CELL_H * 0.4f);
+            Font font = new Font(FontFamily.GenericSerif, CELL_H * 0.6f);
             StringFormat sf = new StringFormat();
             sf.Alignment = StringAlignment.Center;
             sf.LineAlignment = StringAlignment.Center;
@@ -132,7 +132,7 @@ namespace CircuitDesign
                     {
                         e.Graphics.FillRectangle(brushes[n], rect);
                     }
-                    e.Graphics.DrawString(relations_[index0, index1].ToString(), font, Brushes.Red, rect, sf);
+                    e.Graphics.DrawString(relations_[index0, index1].ToString(), font, Brushes.Black, rect, sf);
                 }
             }
         }

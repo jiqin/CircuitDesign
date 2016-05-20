@@ -88,7 +88,15 @@ namespace CircuitDesign
             }
             new_component.SetCenterPos(DesignTools.GetRectangleCenterPt(draw_shape_rect_));
 
-            // TODO Ìí¼Óinner_point, outter_point, connections
+            inner_points_ = new_component.GetInnerConnectPoint();
+            outter_points_ = new_component.GetOutterConnectPoint();
+
+            if (netlist_component != null)
+            {
+                int point_num = inner_points_.Count + outter_points_.Count;
+                connect_relations_ = new int[point_num, point_num];
+                MatrixTool.MatrixCopy(netlist_component.Connections, connect_relations_);
+            }
 
             textBoxtype_.Text = new_component.Type;
             textBox_tagname_.Text = new_component.TagName;

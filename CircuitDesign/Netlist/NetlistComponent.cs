@@ -56,7 +56,7 @@ namespace CircuitDesign
                 string sql = "select * from component";
                 if (type != null)
                 {
-                    sql += string.Format(" where Type = \"{}\"", type);
+                    sql += string.Format(" where Type = \"{0}\"", type);
                 }
                 OleDbDataAdapter da = new OleDbDataAdapter(sql, conn);
                 da.Fill(ds);

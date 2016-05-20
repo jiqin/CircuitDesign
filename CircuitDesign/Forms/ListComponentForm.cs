@@ -101,7 +101,7 @@ namespace CircuitDesign
             }
 
             BaseComponent component = components_[listBox1.SelectedIndex];
-            List<NetlistComponent> netlist_components = _netlist_component_template_manager.load_components(component.Type);
+            List<NetlistComponent> netlist_components = _netlist_component_template_manager.load_components(component.Type.Substring(0, 3));
             add_or_edit_component(_circuit_component_template_manager.GetTypes(), component, netlist_components[0]);
         }
 
