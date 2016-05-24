@@ -6,8 +6,19 @@ using System.Xml;
 
 namespace CircuitDesign
 {
+    /*
+     * 点坐标定义:
+     * X轴向右为正
+     * Y轴向下为正
+     */
     public class DesignTools
     {
+        /*
+         * 缩放点
+         * d, pt: 要缩放的点
+         * scale: 缩放倍数
+         * origenPt: 原点
+         */
         private static float Zoom(float d, float scale, float origenD)
         {
             return (d - origenD) * scale + origenD;
@@ -23,6 +34,9 @@ namespace CircuitDesign
             return new Point((int)(Zoom(pt.X, scale, originPt.X)), (int)(Zoom(pt.Y, scale, originPt.Y)));
         }
 
+        /*
+         * 移动某个点
+         */
         public static Point OffsetPoint(Point pt, Point offset)
         {
             return new Point(pt.X + offset.X, pt.Y + offset.Y);
@@ -30,9 +44,15 @@ namespace CircuitDesign
 
         public static Point SubPoint(Point pt1, Point pt2)
         {
-            return new Point (pt1.X - pt2.X, pt1.Y - pt2.Y);
+            return new Point(pt1.X - pt2.X, pt1.Y - pt2.Y);
         }
 
+        /*
+         * 缩放矩形
+         * rect: 要缩放的矩形
+         * scale: 缩放倍数
+         * origenPt: 原点
+         */
         public static Rectangle ZoomRectangle(Rectangle rect, float scale)
         {
             return ZoomRectangle(rect, scale, new Point(0, 0));
@@ -67,60 +87,95 @@ namespace CircuitDesign
             return rect;
         }
 
+        /*
+         * 创建矩形
+         * pt: 矩形中心点
+         * radius: 半径
+         */
         public static Rectangle CreateRectangelByCenterPt(Point pt, int radius)
         {
             return new Rectangle(pt.X - radius, pt.Y - radius, radius * 2, radius * 2);
         }
 
-        //例子:
-        //pt = (0, 1)
-        //originPt = (0, 0)
-        //direct = 0, 1(顺时针90度), 2, 3, ...
-        //代表 pt 绕 originPt 顺时针旋转 direct * 90 度，返回 (1, 0)
+        /*
+         * 旋转点
+         * pt: 要旋转的点
+         * originPt: 原点
+         * direct: 0, 1(顺时针90度), 2(顺时针180度), 3, ...
+         * 
+         * 示例
+         * pt = (1, 0), originPt = (0, 0), direct = 1
+         * 返回 (0, 1)
+         */
         public static Point RotatePoint(Point pt, Point originPt, int direct)
         {
-            pt.Offset(-originPt.X, -originPt.Y);
+            direct = NormalizeDirection(direct);
 
-            double tmpAngle = direct * 90 * Math.PI / 180;
-            double cosAngle = Math.Cos(tmpAngle);
-            double sinAngle = Math.Sin(tmpAngle);
+            Point tmpPt = new Point(pt.X, pt.Y);
+            tmpPt.Offset(-originPt.X, -originPt.Y);
 
-            Point tmpPt = new Point();
-            tmpPt.X = (int)(pt.X * cosAngle - pt.Y * sinAngle);
-            tmpPt.Y = (int)(pt.X * sinAngle + pt.Y * cosAngle);
-            tmpPt.Offset(originPt);
-            return tmpPt;
-        }
-
-
-        //将矩形沿 originPt 顺时针旋转 direct * 90 度
-        // pt1 pt2
-        // pt3 pt4
-        public static Rectangle RotateRectangle(Rectangle rect, Point originPt, int direct)
-        {
-            Point pt1 = RotatePoint(new Point(rect.Left, rect.Top), originPt, direct);
-            Point pt2 = RotatePoint(new Point(rect.Left + rect.Width, rect.Top), originPt, direct);
-            Point pt3 = RotatePoint(new Point(rect.Left, rect.Top + rect.Height), originPt, direct);
-            Point pt4 = RotatePoint(new Point(rect.Left + rect.Width, rect.Top + rect.Height), originPt, direct);
-            Size size1 = new Size (rect.Width, rect.Height);
-            Size size2 = new Size (rect.Height, rect.Width);
-
-            Rectangle rect2;
-            switch (SetToRange (direct, 4))
+            switch (direct)
             {
                 case 0:
                     {
-                        rect2 = new Rectangle(pt1, size1);
                         break;
                     }
                 case 1:
                     {
-                        rect2 = new Rectangle(pt3, size2);
+                        tmpPt = new Point(-tmpPt.Y, tmpPt.X);
                         break;
                     }
                 case 2:
                     {
-                        rect2 = new Rectangle(pt4, size1);
+                        tmpPt = new Point(-tmpPt.X, -tmpPt.Y);
+                        break;
+                    }
+                case 3:
+                    {
+                        tmpPt = new Point(tmpPt.Y, -tmpPt.X);
+                        break;
+                    }
+            }
+
+            tmpPt.Offset(originPt.X, originPt.Y);
+            return tmpPt;
+        }
+
+        /*
+         * 旋转矩形
+         * rect: 要旋转的矩形
+         * originPt: 原点
+         * direct: 0, 1(顺时针90度), 2(顺时针180度), 3, ...
+         */
+        public static Rectangle RotateRectangle(Rectangle rect, Point originPt, int direct)
+        {
+            direct = NormalizeDirection(direct);
+            /*
+             * pt1 pt2
+             * pt4 pt3
+             */
+            Point pt1 = RotatePoint(new Point(rect.Left, rect.Top), originPt, direct);
+            Point pt2 = RotatePoint(new Point(rect.Right, rect.Top), originPt, direct);
+            Point pt3 = RotatePoint(new Point(rect.Right, rect.Bottom), originPt, direct);
+            Point pt4 = RotatePoint(new Point(rect.Left, rect.Bottom), originPt, direct);
+            Size size1 = new Size (rect.Width, rect.Height);
+            Size size2 = new Size (rect.Height, rect.Width);
+
+            Rectangle rect2 = new Rectangle(pt1, size1);
+            switch (direct)
+            {
+                case 0:
+                    {
+                        break;
+                    }
+                case 1:
+                    {
+                        rect2 = new Rectangle(pt4, size2);
+                        break;
+                    }
+                case 2:
+                    {
+                        rect2 = new Rectangle(pt3, size1);
                         break;
                     }
                 case 3:
@@ -128,31 +183,37 @@ namespace CircuitDesign
                         rect2 = new Rectangle(pt2, size2);
                         break;
                     }
-                default:
-                    rect2 = new Rectangle(pt1, size1);
-                    break;
             }
 
             return rect2;
         }
 
-        public static int SetToRange(int x, int range)
+        /*
+         * 将direct转为0 - 3的值
+         * 0: 顺时针旋转0度
+         * 1: 顺时针旋转90度
+         * 2: 顺时针旋转180度
+         * 3: 顺时针旋转270度
+         */
+        public static int NormalizeDirection(int direct)
         {
-            x %= range;
-            if (x < 0) x += range;
-            if (x >= range) x -= range;
-            return x;
+            direct %= 4;
+            if (direct < 0) direct += 4;
+            if (direct >= 4) direct -= 4;
+            return direct;
         }
 
-        //从点 pt1 和 pt2 生成一个矩形
+        /*
+         * 从点 pt1 和 pt2 生成一个矩形
+         */
         public static Rectangle CreateRectangle(Point pt1, Point pt2)
         {
             int x = Math.Min(pt1.X, pt2.X);
             int y = Math.Min(pt1.Y, pt2.Y);
             int width = Math.Abs(pt1.X - pt2.X);
-            width = (width > 0) ? width : 1;
+            //width = (width > 0) ? width : 1;
             int height = Math.Abs(pt1.Y - pt2.Y);
-            height = (height > 0) ? height : 1;
+            //height = (height > 0) ? height : 1;
 
             Rectangle rect = new Rectangle(x, y, width, height);
             return rect;

@@ -388,7 +388,7 @@ namespace CircuitDesign
 
         private void Turn(int direct)
         {
-            direct_ = DesignTools.SetToRange(direct_ + direct, 4);
+            direct_ = DesignTools.NormalizeDirection(direct_ + direct);
         }
     }
 
