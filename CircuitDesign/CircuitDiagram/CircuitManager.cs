@@ -13,7 +13,7 @@ namespace CircuitDesign
      */
     public class CircuitManager
     {
-        private CircuitComponentTemplateManager _template;
+        private ComponentTemplateManager _template;
 
         private Dictionary<string, Component> components_by_id_ = new Dictionary<string, Component>();
         private Dictionary<string, ComponentNode> nodes_by_id_ = new Dictionary<string, ComponentNode>();
@@ -45,12 +45,12 @@ namespace CircuitDesign
             connet_lines_.Clear();
         }
 
-        public void InitTemplate(CircuitComponentTemplateManager circuit_component_manager)
+        public void InitTemplate(ComponentTemplateManager circuit_component_manager)
         {
             _template = circuit_component_manager;
         }
 
-        public CircuitComponentTemplateManager GetTemplate()
+        public ComponentTemplateManager GetTemplate()
         {
             return _template;
         }

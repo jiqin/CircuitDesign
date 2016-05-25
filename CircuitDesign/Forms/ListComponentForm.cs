@@ -11,7 +11,7 @@ namespace CircuitDesign
 {
     public partial class ListComponentForm : Form
     {
-        private CircuitComponentTemplateManager _circuit_component_template_manager = null;
+        private ComponentTemplateManager _circuit_component_template_manager = null;
         private NetlistComponentTemplateManager _netlist_component_template_manager = null;
         private List<BaseComponent> components_ = null;
         public BaseComponent selected_component = null;
@@ -21,7 +21,7 @@ namespace CircuitDesign
         }
 
         public void InitComponents(
-            CircuitComponentTemplateManager circuit_component_template_manager, 
+            ComponentTemplateManager circuit_component_template_manager, 
             NetlistComponentTemplateManager netlist_component_template_manager,
             bool is_edit_component)
         {

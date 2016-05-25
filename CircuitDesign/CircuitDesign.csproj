@@ -89,7 +89,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircuitDiagram\BaseComponent.cs" />
+    <Compile Include="CircuitDiagram\Components\ComponentBase.cs" />
+    <Compile Include="CircuitDiagram\Components\Components.cs" />
+    <Compile Include="CircuitDiagram\Components\ConnectLine.cs" />
+    <Compile Include="CircuitDiagram\Shapes\Shapes.cs" />
     <Compile Include="Forms\ChangeComponentNameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,7 +101,7 @@
     </Compile>
     <Compile Include="CircuitDiagram\CircuitManager.cs" />
     <Compile Include="CircuitNetlistManager.cs" />
-    <Compile Include="CircuitDiagram\CircuitComponentTemplateManager.cs" />
+    <Compile Include="CircuitDiagram\Components\ComponentTemplateManager.cs" />
     <Compile Include="Forms\CreateConnectionRelationForm.cs">
       <SubType>Form</SubType>
     </Compile>

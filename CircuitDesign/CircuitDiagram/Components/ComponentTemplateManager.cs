@@ -7,13 +7,13 @@ using System.Diagnostics;
 
 namespace CircuitDesign
 {
-    public class CircuitComponentTemplateManager
+    public class ComponentTemplateManager
     {
         private string filename_;
         private Dictionary<string, XmlElement> component_xml_nodes_ = new Dictionary<string, XmlElement>();
         private XmlDocument doc_ = new XmlDocument();
 
-        public CircuitComponentTemplateManager(string filename)
+        public ComponentTemplateManager(string filename)
         {
             filename_ = filename;
         }

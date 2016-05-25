@@ -16,16 +16,16 @@ namespace CircuitDesign
         CircuitNetlistModel _circuit_list_model;
 
         NetlistComponentTemplateManager _netlist_component_template_manager = new NetlistComponentTemplateManager();
-        CircuitComponentTemplateManager _circuit_component_template_manager;
+        ComponentTemplateManager _circuit_component_template_manager;
 
         public CircuitNetlistManager(string component_model_file_path, string circuit_template_file_path)
         {
             _netlist_component_template_manager.LoadTemplates(component_model_file_path);
-            _circuit_component_template_manager = new CircuitComponentTemplateManager(circuit_template_file_path);
+            _circuit_component_template_manager = new ComponentTemplateManager(circuit_template_file_path);
             _circuit_component_template_manager.Load();
         }
 
-        public CircuitComponentTemplateManager get_circuit_component_template()
+        public ComponentTemplateManager get_circuit_component_template()
         {
             return _circuit_component_template_manager;
         }

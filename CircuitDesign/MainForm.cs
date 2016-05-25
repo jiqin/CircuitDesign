@@ -185,7 +185,7 @@ namespace CircuitDesign
 
         private void ToolStripMenuItem_edit_component_Click(object sender, EventArgs e)
         {
-            CircuitComponentTemplateManager ct = circuit_netlist_manager.get_circuit_component_template();
+            ComponentTemplateManager ct = circuit_netlist_manager.get_circuit_component_template();
             NetlistComponentTemplateManager nt = circuit_netlist_manager.get_netlist_component_template();
             ListComponentForm dlg = new ListComponentForm();
             dlg.InitComponents(ct, nt, true);

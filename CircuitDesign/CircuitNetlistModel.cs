@@ -32,7 +32,7 @@ namespace CircuitDesign
 
         public CircuitNetlistModel(
             NetlistComponentTemplateManager netlist_component_manager,
-            CircuitComponentTemplateManager circuit_component_manager)
+            ComponentTemplateManager circuit_component_manager)
         {
             netlist_model.LoadTemplates(netlist_component_manager);
             circuit_manager.InitTemplate(circuit_component_manager);
