@@ -146,6 +146,11 @@ namespace CircuitDesign
         public int[,] ConvertStringToConnectionRelation(string msg, int n)
         {
             int[,] r = new int[n, n];
+            for (int i = 0; i < n; ++i)
+            {
+                r[i, i] = 1;
+            }
+
             string[] connections = msg.Split(':');
             foreach (string connection in connections)
             {

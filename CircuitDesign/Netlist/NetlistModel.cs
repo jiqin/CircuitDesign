@@ -198,15 +198,11 @@ namespace CircuitDesign
 
                 for (int m = 0; m < components[i].Connections.GetLength(0); m++)
                 {
-                    for (int n = 1; n < components[i].Connections.GetLength(1); n++)
+                    for (int n = 0; n < components[i].Connections.GetLength(1); n++)
                     {
-                        if (components[i].Connections[m, n] == 1)//单向正向边
+                        if (components[i].Connections[m, n] == 1)
                         {
                             base_matrix[NodeIndex[m], NodeIndex[n]] = 1;
-                        }
-                        if (components[i].Connections[n, m] == 1)//单向反向边
-                        {
-                            base_matrix[NodeIndex[n], NodeIndex[m]] = 1;
                         }
 
                         // TODO: 连接关系为2 受控连接设置

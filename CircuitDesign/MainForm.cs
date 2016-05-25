@@ -27,6 +27,7 @@ namespace CircuitDesign
         public MainForm()
         {
             InitializeComponent();
+            resize_controls();
             circuit_netlist_manager = new CircuitNetlistManager(component_model_file_path, circuit_template_file_path);
         }
 
@@ -65,7 +66,7 @@ namespace CircuitDesign
         {
             return get_save_file_name(init_dir_project, file_name_filter_project);
         }
-        
+
         private void _save_project()
         {
             string save_file_name = get_save_project_file_name();
@@ -174,7 +175,7 @@ namespace CircuitDesign
                 form.ShowDialog();
 
                 draw_pannel_cricuit(null);
-                if (MessageBox.Show("是否通过电路图重新生成网表数据?\n这将会覆盖现有网表数据!", 
+                if (MessageBox.Show("是否通过电路图重新生成网表数据?\n这将会覆盖现有网表数据!",
                     "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     circuit_netlist_manager.reload_network_by_circuit();
@@ -252,7 +253,7 @@ namespace CircuitDesign
             }
             treeView_simulate_result.ExpandAll();
         }
-        
+
         private void ToolStripMenuItem_output_text_Click(object sender, EventArgs e)
         {
             string file_name = get_save_file_name(".", file_name_output_text);
@@ -321,6 +322,66 @@ namespace CircuitDesign
 
             AnalyzeResult result = (AnalyzeResult)tn.Tag;
             draw_pannel_cricuit(result);
+        }
+
+        private void groupBox1_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void resize_control(Control control, Size containerSize)
+        {
+            control.Size = new Size(containerSize.Width - control.Location.X - 4, containerSize.Height - control.Location.Y - 4);
+        }
+
+        private void resize_controls()
+        {
+            resize_control(splitContainerOutter, this.ClientSize);
+
+            Control[] controls = new Control[] { 
+                richTextBox_netlist, dataGridView_circuit_states, panel_cricuit_diagram, treeView_simulate_result};
+            SplitterPanel[] panels = new SplitterPanel[] { 
+                splitContainerLeft.Panel1, splitContainerLeft.Panel2, splitContainerRight.Panel1, splitContainerRight.Panel2};
+
+            for (int i = 0; i < controls.Length; ++i)
+            {
+                resize_control(controls[i], panels[i].Size);
+            }
+        }
+
+        private void splitContainer2_SizeChanged(object sender, EventArgs e)
+        {
+            resize_controls();
+        }
+
+        private void splitContainer2_Panel1_SizeChanged(object sender, EventArgs e)
+        {
+            resize_controls();
+        }
+
+        private void splitContainer2_Panel2_SizeChanged(object sender, EventArgs e)
+        {
+            resize_controls();
+        }
+
+        private void splitContainer3_SizeChanged(object sender, EventArgs e)
+        {
+            resize_controls();
+        }
+
+        private void splitContainer3_Panel1_SizeChanged(object sender, EventArgs e)
+        {
+            resize_controls();
+        }
+
+        private void splitContainer3_Panel2_SizeChanged(object sender, EventArgs e)
+        {
+            resize_controls();
+        }
+
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            resize_controls();
         }
     }
 }

@@ -46,20 +46,28 @@
             this.仿真结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_output_text = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_output_pic = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox_netlist = new System.Windows.Forms.RichTextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel_cricuit_diagram = new System.Windows.Forms.Panel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView_circuit_states = new System.Windows.Forms.DataGridView();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.treeView_simulate_result = new System.Windows.Forms.TreeView();
+            this.splitContainerOutter = new System.Windows.Forms.SplitContainer();
+            this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.splitContainerRight = new System.Windows.Forms.SplitContainer();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_circuit_states)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.splitContainerOutter.Panel1.SuspendLayout();
+            this.splitContainerOutter.Panel2.SuspendLayout();
+            this.splitContainerOutter.SuspendLayout();
+            this.splitContainerLeft.Panel1.SuspendLayout();
+            this.splitContainerLeft.Panel2.SuspendLayout();
+            this.splitContainerLeft.SuspendLayout();
+            this.splitContainerRight.Panel1.SuspendLayout();
+            this.splitContainerRight.Panel2.SuspendLayout();
+            this.splitContainerRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -71,7 +79,7 @@
             this.仿真结果ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1041, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1050, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -207,102 +215,174 @@
             this.ToolStripMenuItem_output_pic.Text = "生成图形报告";
             this.ToolStripMenuItem_output_pic.Click += new System.EventHandler(this.ToolStripMenuItem_output_pic_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.richTextBox_netlist);
-            this.groupBox1.Location = new System.Drawing.Point(12, 28);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(443, 240);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "网表文件";
-            // 
             // richTextBox_netlist
             // 
             this.richTextBox_netlist.Location = new System.Drawing.Point(6, 20);
             this.richTextBox_netlist.Name = "richTextBox_netlist";
-            this.richTextBox_netlist.Size = new System.Drawing.Size(431, 214);
+            this.richTextBox_netlist.Size = new System.Drawing.Size(100, 100);
             this.richTextBox_netlist.TabIndex = 0;
             this.richTextBox_netlist.Text = "";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.panel_cricuit_diagram);
-            this.groupBox2.Location = new System.Drawing.Point(461, 28);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(568, 240);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "网表文件对应电路图";
-            // 
             // panel_cricuit_diagram
             // 
+            this.panel_cricuit_diagram.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_cricuit_diagram.Location = new System.Drawing.Point(6, 20);
             this.panel_cricuit_diagram.Name = "panel_cricuit_diagram";
-            this.panel_cricuit_diagram.Size = new System.Drawing.Size(556, 220);
+            this.panel_cricuit_diagram.Size = new System.Drawing.Size(100, 100);
             this.panel_cricuit_diagram.TabIndex = 0;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.dataGridView_circuit_states);
-            this.groupBox3.Location = new System.Drawing.Point(12, 274);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(443, 296);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "电路状态及负载响应";
             // 
             // dataGridView_circuit_states
             // 
             this.dataGridView_circuit_states.AllowUserToAddRows = false;
             this.dataGridView_circuit_states.AllowUserToDeleteRows = false;
             this.dataGridView_circuit_states.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_circuit_states.Location = new System.Drawing.Point(6, 15);
+            this.dataGridView_circuit_states.Location = new System.Drawing.Point(6, 20);
             this.dataGridView_circuit_states.Name = "dataGridView_circuit_states";
             this.dataGridView_circuit_states.ReadOnly = true;
             this.dataGridView_circuit_states.RowTemplate.Height = 23;
-            this.dataGridView_circuit_states.Size = new System.Drawing.Size(431, 274);
+            this.dataGridView_circuit_states.Size = new System.Drawing.Size(100, 100);
             this.dataGridView_circuit_states.TabIndex = 0;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.treeView_simulate_result);
-            this.groupBox4.Location = new System.Drawing.Point(461, 274);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(568, 302);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "仿真结果";
             // 
             // treeView_simulate_result
             // 
             this.treeView_simulate_result.Location = new System.Drawing.Point(6, 20);
             this.treeView_simulate_result.Name = "treeView_simulate_result";
-            this.treeView_simulate_result.Size = new System.Drawing.Size(556, 269);
+            this.treeView_simulate_result.Size = new System.Drawing.Size(100, 100);
             this.treeView_simulate_result.TabIndex = 2;
             this.treeView_simulate_result.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_simulate_result_NodeMouseClick);
             this.treeView_simulate_result.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_simulate_result_NodeMouseDoubleClick);
+            // 
+            // splitContainerOutter
+            // 
+            this.splitContainerOutter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainerOutter.Location = new System.Drawing.Point(4, 27);
+            this.splitContainerOutter.Name = "splitContainerOutter";
+            // 
+            // splitContainerOutter.Panel1
+            // 
+            this.splitContainerOutter.Panel1.Controls.Add(this.splitContainerLeft);
+            // 
+            // splitContainerOutter.Panel2
+            // 
+            this.splitContainerOutter.Panel2.Controls.Add(this.splitContainerRight);
+            this.splitContainerOutter.Size = new System.Drawing.Size(1041, 549);
+            this.splitContainerOutter.SplitterDistance = 384;
+            this.splitContainerOutter.SplitterWidth = 1;
+            this.splitContainerOutter.TabIndex = 2;
+            // 
+            // splitContainerLeft
+            // 
+            this.splitContainerLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerLeft.Name = "splitContainerLeft";
+            this.splitContainerLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerLeft.Panel1
+            // 
+            this.splitContainerLeft.Panel1.Controls.Add(this.richTextBox_netlist);
+            this.splitContainerLeft.Panel1.Controls.Add(this.label1);
+            this.splitContainerLeft.Panel1.SizeChanged += new System.EventHandler(this.splitContainer2_Panel1_SizeChanged);
+            // 
+            // splitContainerLeft.Panel2
+            // 
+            this.splitContainerLeft.Panel2.Controls.Add(this.dataGridView_circuit_states);
+            this.splitContainerLeft.Panel2.Controls.Add(this.label2);
+            this.splitContainerLeft.Panel2.SizeChanged += new System.EventHandler(this.splitContainer2_Panel2_SizeChanged);
+            this.splitContainerLeft.Size = new System.Drawing.Size(384, 549);
+            this.splitContainerLeft.SplitterDistance = 269;
+            this.splitContainerLeft.SplitterWidth = 1;
+            this.splitContainerLeft.TabIndex = 0;
+            this.splitContainerLeft.SizeChanged += new System.EventHandler(this.splitContainer2_SizeChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "网表文件";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(113, 12);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "电路状态及负载响应";
+            // 
+            // splitContainerRight
+            // 
+            this.splitContainerRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainerRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerRight.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerRight.Name = "splitContainerRight";
+            this.splitContainerRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerRight.Panel1
+            // 
+            this.splitContainerRight.Panel1.Controls.Add(this.panel_cricuit_diagram);
+            this.splitContainerRight.Panel1.Controls.Add(this.label3);
+            this.splitContainerRight.Panel1.SizeChanged += new System.EventHandler(this.splitContainer3_Panel1_SizeChanged);
+            // 
+            // splitContainerRight.Panel2
+            // 
+            this.splitContainerRight.Panel2.Controls.Add(this.treeView_simulate_result);
+            this.splitContainerRight.Panel2.Controls.Add(this.label4);
+            this.splitContainerRight.Panel2.SizeChanged += new System.EventHandler(this.splitContainer3_Panel2_SizeChanged);
+            this.splitContainerRight.Size = new System.Drawing.Size(656, 549);
+            this.splitContainerRight.SplitterDistance = 269;
+            this.splitContainerRight.SplitterWidth = 1;
+            this.splitContainerRight.TabIndex = 0;
+            this.splitContainerRight.SizeChanged += new System.EventHandler(this.splitContainer3_SizeChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "网表文件对应电路图";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "仿真结果";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 575);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1050, 575);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.splitContainerOutter);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "工程项目";
+            this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_circuit_states)).EndInit();
-            this.groupBox4.ResumeLayout(false);
+            this.splitContainerOutter.Panel1.ResumeLayout(false);
+            this.splitContainerOutter.Panel2.ResumeLayout(false);
+            this.splitContainerOutter.ResumeLayout(false);
+            this.splitContainerLeft.Panel1.ResumeLayout(false);
+            this.splitContainerLeft.Panel1.PerformLayout();
+            this.splitContainerLeft.Panel2.ResumeLayout(false);
+            this.splitContainerLeft.Panel2.PerformLayout();
+            this.splitContainerLeft.ResumeLayout(false);
+            this.splitContainerRight.Panel1.ResumeLayout(false);
+            this.splitContainerRight.Panel1.PerformLayout();
+            this.splitContainerRight.Panel2.ResumeLayout(false);
+            this.splitContainerRight.Panel2.PerformLayout();
+            this.splitContainerRight.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,11 +397,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_save_project;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_add_new_network;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_exit;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox richTextBox_netlist;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_add_circuit_file;
         private System.Windows.Forms.DataGridView dataGridView_circuit_states;
         private System.Windows.Forms.ToolStripMenuItem 电路图ToolStripMenuItem;
@@ -336,6 +412,13 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_output_pic;
         private System.Windows.Forms.Panel panel_cricuit_diagram;
         private System.Windows.Forms.TreeView treeView_simulate_result;
+        private System.Windows.Forms.SplitContainer splitContainerOutter;
+        private System.Windows.Forms.SplitContainer splitContainerLeft;
+        private System.Windows.Forms.SplitContainer splitContainerRight;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
 
